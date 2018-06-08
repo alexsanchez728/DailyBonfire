@@ -1,12 +1,13 @@
 ﻿using DailyBonfireProject.Models;
 using DailyBonfireProject.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace BonfireApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/content")]
+    [EnableCors("BonfirePolicy")]
     public class ContentController : Controller
     {
         readonly ContentRepository _repo;

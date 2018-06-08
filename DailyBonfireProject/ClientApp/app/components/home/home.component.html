@@ -1,16 +1,95 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-    <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-    <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-    <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>
-    <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-    <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-    <li><strong>Server-side prerendering</strong>. For faster initial loading and improved SEO, your Angular app is prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app takes over.</li>
-    <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>
-    <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance injected into the page.</li>
-    <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
-</ul>
+<div class="jumbotron text-center">
+    <div class="container">
+
+        <h2>How To: Contribute</h2>
+        <p> Here will be chrome instructions</p>
+        <p id="or-divider"> or </p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+            Add
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add Content</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form novalidate class="form-horizontal" name="newContactForm" ng-submit="update(user)">
+                            <div class="form-group">
+
+                                <label class="control-label col-md-3" for="title" name="nTitle">Title:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="title" placeholder="Grab Their Attention" ng-model="newContent.title" required>
+                                </div>
+
+                                <label class="control-label col-md-3" for="uDesc" name="nUserDesc">Description:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="uDesc" placeholder="Enter your commentary" height="48" ng-model="newContent.userDescription">
+                                </div>
+
+                                <label class="control-label col-md-3" for="webDesc" name="nWebsiteDesc">Description from Website:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="webDesc" placeholder="(not required)" ng-model="newContent.WebsiteDescription" disabled>
+                                </div>
+
+                                <div class="btn-group col-md-12" role="group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Add to Existing Board
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">board1</a></li>
+                                        <li><a href="#">board2</a></li>
+                                    </ul>
+                                </div>
+
+                                <label class="control-label col-md-4" for="visibility" name="nPublic">Mark as Private?</label>
+                                <div class="col-md-4">
+                                    <input type="checkbox" id="visibility" aria-label="Private">
+                                </div>
+
+                                <div class="col-sm-offset-5 col-sm-2">
+                                    <button ng-if="newContactForm.$valid" type="submit" class="btn btn-primary" value="Save">Submit</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <div class="col-md-6">
+        <h3>Latest</h3>
+        <div class="list-group">
+            <button type="button" class="list-group-item">Cras justo odio</button>
+            <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
+            <button type="button" class="list-group-item">Morbi leo risus</button>
+            <button type="button" class="list-group-item">Porta ac consectetur ac</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            <button type="button" class="list-group-item">Vestibulum at eros</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Popular Tags</h3>
+        <button class="btn btn-default">one <span class="badge">400</span></button>
+        <button class="btn btn-default">two <span class="badge">399</span></button>
+        <button class="btn btn-default">threethree <span class="badge">120</span></button>
+        <button class="btn btn-default">four <span class="badge">10</span></button>
+        <button class="btn btn-default">five <span class="badge">1</span></button>
+    </div>

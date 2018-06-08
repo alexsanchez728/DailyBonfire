@@ -27,6 +27,16 @@
                         <span class='glyphicon glyphicon-th-list'></span> Fetch data
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/my-home']">
+                        <span class='glyphicon glyphicon-th-list'></span> My Home
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/profile']">
+                        <span class='glyphicon glyphicon-user'></span> Profile
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using DailyBonfireProject.Models;
 using DailyBonfireProject.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonfireApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/User")]
+    [EnableCors("BonfirePolicy")]
     public class UserController : Controller
     {
         readonly UsersRepository _repo;

@@ -1,11 +1,13 @@
 ﻿using DailyBonfireProject.Models;
 using DailyBonfireProject.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonfireApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Boards")]
+    [EnableCors("BonfirePolicy")]
     public class BoardsController : Controller
     {
         readonly BoardsRepository _repo;

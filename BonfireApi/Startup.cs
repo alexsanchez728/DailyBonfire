@@ -25,6 +25,9 @@ namespace BonfireApi
             services.AddScoped<UsersRepository>();
 
             services.AddMvc();
+
+            services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +37,13 @@ namespace BonfireApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:53505")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                );
 
             app.UseMvc();
         }
