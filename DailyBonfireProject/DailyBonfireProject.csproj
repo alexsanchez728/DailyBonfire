@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\myhomeboards\myhomeboards.component.ts" />
     <None Remove="ClientApp\app\components\myhome\myhome.component.ts" />
     <None Remove="ClientApp\app\components\profile\profile.component.ts" />
   </ItemGroup>
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\myhomeboards\myhomeboards.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\myhome\myhome.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\profile\profile.component.ts" />
   </ItemGroup>

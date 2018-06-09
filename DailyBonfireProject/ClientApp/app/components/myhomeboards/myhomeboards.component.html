@@ -1,0 +1,56 @@
+﻿<h1>My Boards</h1>
+
+<div class="container">
+    <div class="row">
+        <div *ngFor="let board of boards" class="col-md-offset-1 col-md-3">
+            <h4>{{board.title}}</h4>
+            <p>{{board.DescriptionFromUser}}</p>
+            <span *ngIf="board.isPublic !== true" class="glyphicon glyphicon-lock"></span>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-success btn-lg center-block" data-toggle="modal" data-target="#myModal">
+    Add Board
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add board</h4>
+            </div>
+            <div class="modal-body">
+                <form novalidate class="form-horizontal" name="newContactForm" ng-submit="update(user)">
+                    <div class="form-group">
+
+                        <label class="control-label col-md-3" for="title" name="nTitle">Title:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="title" placeholder="Grab Their Attention" ng-model="newContent.title" required>
+                        </div>
+
+                        <label class="control-label col-md-3" for="uDesc" name="nUserDesc">Description:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="uDesc" placeholder="Enter your commentary" height="48" ng-model="newContent.userDescription">
+                        </div>
+
+                        <label class="control-label col-md-4" for="visibility" name="nPublic">Mark as Private?</label>
+                        <div class="col-md-4">
+                            <input type="checkbox" id="visibility" aria-label="Private">
+                        </div>
+
+                        <div class="col-sm-offset-5 col-sm-2">
+                            <button ng-if="newContactForm.$valid" type="submit" class="btn btn-primary" value="Save">Submit</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

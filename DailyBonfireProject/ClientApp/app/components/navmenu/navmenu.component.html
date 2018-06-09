@@ -27,9 +27,19 @@
                         <span class='glyphicon glyphicon-th-list'></span> Fetch data
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/my-home']">
+                <li>
+                    <h4>
                         <span class='glyphicon glyphicon-th-list'></span> My Home
+                    </h4>
+                </li>
+                 <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/my-home-boards']">
+                        <span class='glyphicon glyphicon-chevron-right'></span> Boards
+                    </a>
+                </li>
+                 <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/my-home']">
+                        <span class='glyphicon glyphicon-chevron-right'></span> Saved
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
