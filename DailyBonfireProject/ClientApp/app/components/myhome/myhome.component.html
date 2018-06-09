@@ -3,7 +3,6 @@
 <p>This component demonstrates fetching data from the server.</p>
 
 <p *ngIf="!content"><em>Loading...</em></p>
-
 <table class='table' *ngIf="content">
     <thead>
         <tr>
@@ -11,16 +10,16 @@
             <th>Url</th>
             <th>User's Description</th>
             <th>Website's Description</th>
-            <th>Public status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of content">
-            <td>{{ item.Title }}</td>
-            <td>{{ item.Url }}</td>
-            <td>{{ item.UserDescription }}</td>
-            <td>{{ item.WebsiteDescription }}</td>
-            <td>{{ item.IsPublic }}</td>
+            <td>{{ item.title }}</td>
+            <td><a href="{{ item.url }}">Link</a></td>
+            <td>{{ item.userDescription }}</td>
+            <td>{{ item.websiteDescription }}</td>
+            <td><span *ngIf="item.isPublic !== true" class="glyphicon glyphicon-lock"></span></td>
         </tr>
     </tbody>
 </table>

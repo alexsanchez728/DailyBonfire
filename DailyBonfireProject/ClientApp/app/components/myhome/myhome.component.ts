@@ -9,7 +9,7 @@ export class MyHomeComponent {
     public content: content[];
 
     constructor(http: Http, @Inject('API_URL') apiUrl: string) {
-        http.get(apiUrl + '/api/UserContent/7', { withCredentials: true }).subscribe(result => {
+        http.get(apiUrl + '/api/UserContent/see/7/7').subscribe(result => {
             this.content = result.json() as content[];
         }, error => console.error(error));
     }

@@ -26,7 +26,12 @@ namespace BonfireApi
 
             services.AddMvc();
 
-            services.AddCors();
+            services.AddCors(o => o.AddPolicy("BonfirePolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
         }
 
@@ -38,12 +43,7 @@ namespace BonfireApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:53505")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                );
+            app.UseCors("BonfirePolicy");
 
             app.UseMvc();
         }

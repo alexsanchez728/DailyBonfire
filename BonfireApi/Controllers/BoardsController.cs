@@ -7,7 +7,6 @@ namespace BonfireApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Boards")]
-    [EnableCors("BonfirePolicy")]
     public class BoardsController : Controller
     {
         readonly BoardsRepository _repo;
