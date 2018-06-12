@@ -16,9 +16,9 @@ export class MyHomeComponent {
 }
 
 interface content {
-    Title: string;
-    Url: string;
-    UserDescription: string;
-    WebsiteDescription: string;
-    IsPublic: boolean;
+    title: string;
+    url: string;
+    userDescription: string;
+    websiteDescription: string;
+    isPublic: boolean;
 }

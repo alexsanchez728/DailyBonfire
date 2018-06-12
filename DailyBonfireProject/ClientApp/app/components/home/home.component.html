@@ -5,8 +5,9 @@
         <p> Here will be chrome instructions</p>
         <p id="or-divider"> - or - </p>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
-            Add
+        <label class="col-xs-12" for="add-button">Add Content:</label>
+        <button type="button" id="add-button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+            <span class="glyphicon glyphicon-plus"></span>
         </button>
 
         <!-- Modal -->
@@ -70,10 +71,68 @@
 </div>
     <div class="col-md-6">
         <h3>Latest</h3>
-        <div *ngFor="let item of content" class="list-group">
-            <button type="button" class="list-group-item" data-toggle="modal" data-target="#viewModal">
+        <div *ngFor="let item of content; let i = index" class="list-group">
+            <button type="button" class="list-group-item" data-toggle="modal" [attr.data-target]="'#' + i" >
                 {{item.title}}
             </button>
+
+            <!-- Modal -->
+            <!--<div class="modal fade" id= "viewModal{{i}}"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ item.title }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form novalidate class="form-horizontal" name="newContactForm" ng-submit="update(user)">
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-3" for="title" name="nTitle">Title:</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="title" placeholder="Grab Their Attention" ng-model="newContent.title" required>
+                                    </div>
+
+                                    <label class="control-label col-md-3" for="uDesc" name="nUserDesc">Description:</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="uDesc" placeholder="Enter your commentary" height="48" ng-model="newContent.userDescription">
+                                    </div>
+
+                                    <label class="control-label col-md-3" for="webDesc" name="nWebsiteDesc">Description from Website:</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="webDesc" placeholder="(not required)" ng-model="newContent.WebsiteDescription" disabled>
+                                    </div>
+
+                                    <div class="btn-group col-md-12" role="group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Add to Existing Board
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">board1</a></li>
+                                            <li><a href="#">board2</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <label class="control-label col-md-4" for="visibility" name="nPublic">Mark as Private?</label>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" id="visibility" aria-label="Private">
+                                    </div>
+
+                                    <div class="col-sm-offset-5 col-sm-2">
+                                        <button ng-if="newContactForm.$valid" type="submit" class="btn btn-primary" value="Save">Submit</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
         </div>
     </div>
     <div class="col-md-6">

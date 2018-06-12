@@ -2,16 +2,24 @@
 
 <div class="container">
     <div class="row">
-        <div *ngFor="let board of boards" class="col-md-offset-1 col-md-3">
-            <h4>{{board.title}}</h4>
-            <p>{{board.DescriptionFromUser}}</p>
-            <span *ngIf="board.isPublic !== true" class="glyphicon glyphicon-lock"></span>
+        <div *ngFor="let board of boards" class="col-md-3">
+
+            <div [routerLink]="['/boards', board.boardId]" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ board.title }}</h3>
+                </div>
+                <div class="panel-body">
+                    {{ board.descriptionFromUser }}
+                </div>
+                <span *ngIf="board.isPublic !== true" class=" col-xs-offset-11 glyphicon glyphicon-eye-close"></span>
+            </div>
+
         </div>
     </div>
 </div>
 
 <button type="button" class="btn btn-success btn-lg center-block" data-toggle="modal" data-target="#myModal">
-    Add Board
+    <span class="glyphicon glyphicon-plus"></span>
 </button>
 
 <!-- Modal -->

@@ -1,0 +1,13 @@
+﻿<h1>{{ board.title }}</h1>
+<h4>{{ board.descriptionFromUser }}</h4>
+<h4>
+    Posted By:<a [routerLink]="['/user', board.userId]">{{ board.userName }}</a>
+</h4>
+<div *ngFor="let item of content">
+    <div>
+        <p>{{ item.title }}</p>
+        <p>{{ item.descriptionFromUser }}</p>
+        <p>{{ item.websiteDescription }}</p>
+        <a target="_blank" href="{{ item.url }}">Link</a>
+    </div>
+</div>

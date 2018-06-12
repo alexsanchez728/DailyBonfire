@@ -16,7 +16,7 @@
     <tbody>
         <tr *ngFor="let item of content">
             <td>{{ item.title }}</td>
-            <td><a href="{{ item.url }}">Link</a></td>
+            <td><a target="_blank" href="{{ item.url }}">Link</a></td>
             <td>{{ item.userDescription }}</td>
             <td>{{ item.websiteDescription }}</td>
             <td><span *ngIf="item.isPublic !== true" class="glyphicon glyphicon-lock"></span></td>

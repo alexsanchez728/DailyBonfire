@@ -1,13 +1,23 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, Inject } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Component({
     selector: 'profile',
     templateUrl: './profile.component.html'
 })
 export class ProfileComponent {
-    public currentCount = 0;
+    public user: user;
 
-    public incrementCounter() {
-        this.currentCount++;
+    constructor(http: Http, @Inject('API_URL') apiUrl: string) {
+        http.get(apiUrl + '/api/User/7').subscribe(result => {
+            this.user = result.json() as user;
+        }, error => console.error(error));
     }
+
+}
+
+interface user {
+    Name: string;
+    Bio: string;
+    JoinDate: Date;
 }

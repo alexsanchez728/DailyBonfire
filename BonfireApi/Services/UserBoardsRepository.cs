@@ -45,10 +45,19 @@ namespace DailyBonfireProject.Services
             using (var db = GetConnection())
             {
                 db.Open();
-                var result = db.QueryFirstOrDefault<BoardDisplayDto>(@"Select * 
+                var result = db.QueryFirstOrDefault<BoardDisplayDto>(@"Select 
+                                                                        UserId, 
+                                                                        BoardId, 
+                                                                        IsPublic,
+                                                                        Title, 
+                                                                        DescriptionFromUser,
+                                                                        [Name] AS UserName
                                                                             From UserBoard
                                                                             Join Boards on UserBoard.BoardId = Boards.Id
-                                                                            Where Boards.id = @id", new { id });
+                                                                            Join [User] on UserBoard.UserId = [User].Id
+
+                                                                            where Boards.id = @id AND [User].Id = UserBoard.UserId"
+                                                                            , new { id });
                 return result;
             }
         }

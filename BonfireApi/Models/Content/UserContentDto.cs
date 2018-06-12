@@ -6,7 +6,7 @@
         public int UserId { get; set; }
         public int ContentId { get; set; }
         public int UserBoardId { get; set; }
-        public string UserDescription { get; set; }
+        public string DescriptionFromUser { get; set; }
         //public List<Keyword> Keywords { get; set; }
         public bool IsPublic { get; set; }
     }

@@ -50,6 +50,31 @@ namespace DailyBonfireProject.Services
                 return result;
             }
         }
+        // when the user is getting one piece of content
+        public List<ContentDisplayDto> GetByBoardId(int id)
+        {
+            using (var db = GetConnection())
+            {
+                db.Open();
+                // This isn't going to go thru since Id exists twice in this object, i need it to map to UC's id
+                var results = db.Query<ContentDisplayDto>(@"Select
+                                                            UserId,
+                                                            ContentId,
+                                                            UserDescription,
+                                                            IsPublic,
+                                                            [Name] AS UserName,
+                                                            UserBoardId,
+                                                            Title,
+                                                            WebsiteDescription,
+                                                            [url]
+                                                                From UserContent
+                                                                Join Content on UserContent.ContentId = Content.Id
+                                                                Join [User] on UserCOntent.UserId = [User].Id
+                                                                where UserContent.UserBoardId = @id AND UserContent.IsPublic = 1; ", new { id });
+
+                return results.ToList();
+            }
+        }
 
         // when the user wants to see all content a user (themselves included) has saved
         public List<ContentDisplayDto> GetByUserId(int currentUserId, int UserId)

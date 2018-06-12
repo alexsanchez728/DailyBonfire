@@ -13,16 +13,12 @@ export class MyHomeBoardsComponent {
             this.boards = result.json() as boards[];
         }, error => console.error(error));
     }
-    // When i go to my boards page
-    // Then I should see cards displaying with all my boards
-    
-    // When I select a board
-    // I should see all the content that is saved to that board
-    // 
 }
 
 interface boards {
-    Title: string;
-    DescriptionFromUser: string;
-    IsPublic: boolean;
+    boardId: number,
+    title: string,
+    descriptionFromUser: string,
+    isPublic: boolean,
+    userName: string,
 }

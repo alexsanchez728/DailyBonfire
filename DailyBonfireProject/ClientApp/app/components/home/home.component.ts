@@ -21,10 +21,10 @@ export class HomeComponent {
 }
 
 interface content {
-    Id: number;
-    Title: string;
-    Url: string;
-    UserDescription: string;
-    WebsiteDescription: string;
-    IsPublic: boolean;
+    id: number;
+    title: string;
+    url: string;
+    DescriptionFromUser: string;
+    websiteDescription: string;
+    isPublic: boolean;
 }
