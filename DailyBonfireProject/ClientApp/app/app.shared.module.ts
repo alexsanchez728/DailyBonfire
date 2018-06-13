@@ -4,23 +4,36 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 
+
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
+
 import { HomeComponent } from './components/home/home.component';
 import { MyHomeComponent } from './components/myhome/myhome.component';
-import { BoardComponent } from './components/board/board.component';
+
 import { MyHomeBoardsComponent } from './components/myhomeboards/myhomeboards.component';
+
+import { BoardComponent } from './components/board/board.component';
+import { EditBoardComponent } from './components/editboard/editboard.component';
+import { NewBoardComponent } from './components/newboard/newboard.component';
+
 import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
+
+        HomeComponent,
         MyHomeComponent,
+
         MyHomeBoardsComponent,
+
         BoardComponent,
-        ProfileComponent,
-        HomeComponent
+        EditBoardComponent,
+        NewBoardComponent,
+
+        ProfileComponent
     ],
     imports: [
         CommonModule,
@@ -31,6 +44,8 @@ import { ProfileComponent } from './components/profile/profile.component';
             { path: 'home', component: HomeComponent },
             { path: 'my-home', component: MyHomeComponent },
             { path: 'my-home-boards', component: MyHomeBoardsComponent },
+            { path: 'editboard/:id', component: EditBoardComponent },
+            { path: 'newboard', component: NewBoardComponent },
             { path: 'boards/:id', component: BoardComponent },
             { path: 'profile', component: ProfileComponent },
             { path: '**', redirectTo: 'home' }

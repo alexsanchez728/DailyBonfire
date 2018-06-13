@@ -23,8 +23,11 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\board\board.component.ts" />
+    <None Remove="ClientApp\app\components\editboard\editboard.component.ts" />
+    <None Remove="ClientApp\app\components\newboard\newboard.component.ts" />
     <None Remove="ClientApp\app\components\myhomeboards\myhomeboards.component.ts" />
     <None Remove="ClientApp\app\components\myhome\myhome.component.ts" />
+    <None Remove="ClientApp\app\components\newcontent\newcontent.component.ts" />
     <None Remove="ClientApp\app\components\profile\profile.component.ts" />
   </ItemGroup>
 
@@ -34,8 +37,11 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\board\board.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\editboard\editboard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\newboard\newboard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\myhomeboards\myhomeboards.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\myhome\myhome.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\newcontent\newcontent.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\profile\profile.component.ts" />
   </ItemGroup>
 

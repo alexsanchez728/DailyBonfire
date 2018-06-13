@@ -1,0 +1,52 @@
+﻿<form class="form-horizontal" #newboard="ngForm" (ngSubmit)="onClickSubmit(newboard.value)">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Add Board</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="title">Title</label>
+            <div class="col-md-4">
+                <input id="title" name="title" type="text" placeholder="placeholder" class="form-control input-md" ngModel>
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="descriptionFromUser">Your Commentary</label>
+            <div class="col-md-4">
+                <textarea class="form-control" id="descriptionFromUser" name="descriptionFromUser" ngModel></textarea>
+            </div>
+        </div>
+
+        <!-- Multiple Radios -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="publicity">Public/Private</label>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label for="publicity-0">
+                        <input type="radio" name="isPublic" id="publicity-0" value="true" checked="checked" ngModel>
+                        Public
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="publicity-1">
+                        <input type="radio" name="isPublic" id="publicity-1" value="false" ngModel>
+                        Private
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-8">
+                <button class="btn btn-success" id="submit" name="submit" type="submit" value="submit">Submit</button>
+                <button id="close" name="close" class="btn btn-danger" [routerLink]="['/myhomeboards']">Nevermind</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

@@ -18,18 +18,22 @@ namespace DailyBonfireProject.Services
         {
             return new SqlConnection(_config["ConnectionStrings:Bonfire"]);
         }
-        public bool Post(object input)
+        public BoardsDto Post(BoardsDto input)
         {
             using (var db = GetConnection())
             {
                 db.Open();
                 var result = db.Execute(@"Insert into boards 
                                                         ([Title]
-                                                        ,[DescriptionFromSite]
+                                                        ,[DescriptionFromUser])
                                                     Values
-                                                        (@title
-                                                        ,@DescriptionFromSite)", input);
-                return result == 1;
+                                                        (@Title
+                                                        ,@DescriptionFromUser)", input);
+                var createdBoard = db.QueryFirstOrDefault<BoardsDto>(@"select
+                                                        top 1 *
+                                                        from boards
+                                                        order by Id DESC");
+                return createdBoard;
             }
         }
 

@@ -83,7 +83,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Post(object input)
+        public bool Post(UserBoardsDto input)
         {
             using (var db = GetConnection())
             {
@@ -95,7 +95,7 @@ namespace DailyBonfireProject.Services
                                                 Values
                                                     (@UserId
                                                     ,@BoardId
-                                                    ,@IsPublic", input);
+                                                    ,@IsPublic)", input);
                 return result == 1;
             }
         }

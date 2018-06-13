@@ -9,5 +9,7 @@
         <p>{{ item.descriptionFromUser }}</p>
         <p>{{ item.websiteDescription }}</p>
         <a target="_blank" href="{{ item.url }}">Link</a>
+        <button class="btn btn-warning" [routerLink]="['/editboard', board.boardId]">Edit</button>
+        <button class="btn btn-danger">Delete</button>
     </div>
 </div>

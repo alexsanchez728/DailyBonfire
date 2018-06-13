@@ -1,0 +1,72 @@
+﻿<form class="form-horizontal">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Add Content</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="title">Title</label>
+            <div class="col-md-4">
+                <input [(ngModel)]="board.title" id="title" name="title" type="text" placeholder="placeholder" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="userDescription">Your Commentary</label>
+            <div class="col-md-4">
+                <textarea [(ngModel)]="board.userDescription" class="form-control" id="userDescription" name="userDescription">default text</textarea>
+            </div>
+        </div>
+
+        <!-- Multiple Radios -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="publicity">Public/Private</label>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label for="publicity-0">
+                        <input [(ngModel)]="board.isPublic" type="radio" name="publicity" id="publicity-0" value="true" checked="checked">
+                        Public
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="publicity-1">
+                        <input [(ngModel)]="board.isPublic" type="radio" name="publicity" id="publicity-1" value="false">
+                        Private
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="rul">Url</label>
+            <div class="col-md-4">
+                <input [(ngModel)]="board.url" id="url" name="url" type="text" placeholder="http://www.example.com" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="boardOptions">Save To Board</label>
+            <div class="col-md-4">
+                <select id="boardOptions" name="boardOptions" class="form-control">
+                    <option [(ngModel)]="board.boardId" value="boardOptions.boardId">{{ boardOptions.boardId }}</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-8">
+                <button id="submit" name="submit" class="btn btn-success" value="save" (click)="addNew">Submit</button>
+                <button id="close" name="close" class="btn btn-danger" [routerLink]="['/myhomeboards']">Nevermind</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
