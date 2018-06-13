@@ -14,12 +14,11 @@ export class BoardComponent {
 
     constructor(route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.selection = Number(route.snapshot.paramMap.get('id'));
         this.board = {} as board;
+        this.selection = Number(route.snapshot.paramMap.get('id'));
+
         http.get(apiUrl + '/api/UserBoards/' + this.selection).subscribe(result => {
             this.board = result.json() as board;
-
-            console.log(this.board);
 
             http.get(apiUrl + '/api/UserContent/board/' + this.board.boardId).subscribe(result => {
                 this.content = result.json() as content[];

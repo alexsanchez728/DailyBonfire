@@ -41,7 +41,6 @@ export class NewBoardComponent {
             this.newuserboard.isPublic = data.isPublic;
             this.newuserboard.userId = this.user.id;
             this.newuserboard.boardId = this.newboardresult.id;
-            console.log(this.newuserboard);
 
             this.http.post(this.url + '/api/UserBoards', this.newuserboard).subscribe(res => {});
 
@@ -49,17 +48,7 @@ export class NewBoardComponent {
         });
 
     }
-
-    //doPOST() {
-    //    console.log("POST");
-    //    let url = `${this.apiRoot}/post`;
-    //    this.http.post(url, { moo: "foo", goo: "loo" }).subscribe(res => console.log(res.json()));
-    //}
 }
-
-// need to POST to boards table
-// need to POST to UserBoard table
-
 
 interface UserBoardsDto {
     userId: number,
