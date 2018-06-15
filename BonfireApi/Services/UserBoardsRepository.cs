@@ -61,6 +61,23 @@ namespace DailyBonfireProject.Services
                 return result;
             }
         }
+        
+        public BoardDisplayDto GetByUserAndBoardId(int currentUserId, int boardId)
+        {
+            using (var db = GetConnection())
+            {
+                // get content by UserId. if this current user is not the OP, then show only this user's public boards
+                db.Open();
+                var result = db.QueryFirstOrDefault<BoardDisplayDto>(@"select *
+                                                                From userBoard
+                                                                where UserId = @currentUserId
+                                                                And
+                                                                BoardId = @boardId"
+                                                                , new { currentUserId, boardId });
+                return result;
+            }
+        }
+
 
         // for getting all boards with this user's id
         public List<BoardDisplayDto> GetByUserId(int currentUserId, int UserId)

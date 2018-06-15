@@ -37,13 +37,13 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Put(BoardsDto boards)
+        public bool Put(BoardsDto board)
         {
             using (var db = GetConnection())
             {
                 var result = db.Execute(@"update boards
                                                 Set [Title] = @title
-                                                    ,[DescriptionFromSite] = @DescriptionFromSite", boards);
+                                                    ,[DescriptionFromUser] = @DescriptionFromUser", board);
                 return result == 1;
             }
         }

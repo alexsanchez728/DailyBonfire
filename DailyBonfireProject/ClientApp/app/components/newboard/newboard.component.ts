@@ -34,7 +34,7 @@ export class NewBoardComponent {
 
         this.boardtopost.Title = data.title;
         this.boardtopost.DescriptionFromUser = data.descriptionFromUser;
-        console.log(this.url + '/Boards');
+        console.log(this.url + '/Content');
         this.http.post(this.url + '/api/Boards', this.boardtopost ).subscribe(res => {
             this.newboardresult = res.json()
 

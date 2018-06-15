@@ -19,6 +19,7 @@
             <td><a target="_blank" href="{{ item.url }}">Link</a></td>
             <td>{{ item.userDescription }}</td>
             <td>{{ item.websiteDescription }}</td>
+            <td class="btn btn-warning" [routerLink]="['/editcontent', item.contentId]">Edit</td>
             <td><span *ngIf="item.isPublic !== true" class="glyphicon glyphicon-lock"></span></td>
         </tr>
     </tbody>

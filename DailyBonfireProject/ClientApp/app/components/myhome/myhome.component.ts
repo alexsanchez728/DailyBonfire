@@ -8,17 +8,22 @@ import { Http } from '@angular/http';
 export class MyHomeComponent {
     public content: content[];
 
+    public currentUser = 7
+
     constructor(http: Http, @Inject('API_URL') apiUrl: string) {
-        http.get(apiUrl + '/api/UserContent/see/7/7').subscribe(result => {
+        http.get(apiUrl + '/api/UserContent/see/' + this.currentUser + '/' + this.currentUser).subscribe(result => {
             this.content = result.json() as content[];
         }, error => console.error(error));
     }
 }
 
 interface content {
-    title: string;
-    url: string;
-    userDescription: string;
-    websiteDescription: string;
+    userId: number,
+    contentId: number,
+    userBoardId: number,
+    title: string,
+    url: string,
+    userDescription: string,
+    websiteDescription: string,
     isPublic: boolean;
 }

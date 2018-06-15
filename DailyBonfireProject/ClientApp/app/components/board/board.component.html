@@ -1,5 +1,7 @@
 ﻿<h1>{{ board.title }}</h1>
 <h4>{{ board.descriptionFromUser }}</h4>
+<button class="btn btn-warning" [routerLink]="['/editboard', board.boardId]">Edit</button>
+<button class="btn btn-danger">Delete</button>
 <h4>
     Posted By:<a [routerLink]="['/user', board.userId]">{{ board.userName }}</a>
 </h4>
@@ -9,7 +11,5 @@
         <p>{{ item.descriptionFromUser }}</p>
         <p>{{ item.websiteDescription }}</p>
         <a target="_blank" href="{{ item.url }}">Link</a>
-        <button class="btn btn-warning" [routerLink]="['/editboard', board.boardId]">Edit</button>
-        <button class="btn btn-danger">Delete</button>
     </div>
 </div>

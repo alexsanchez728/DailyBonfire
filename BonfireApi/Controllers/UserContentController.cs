@@ -47,7 +47,7 @@ namespace BonfireApi.Controllers
 
         // POST: api/UserContent
         [HttpPost]
-        public bool Post([FromBody]object input)
+        public bool Post([FromBody]UserContentDto input)
         {
             return _repo.Post(input);
         }

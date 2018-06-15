@@ -11,27 +11,38 @@ export class HomeComponent {
     public content: contentDisplayable[];
     public http: Http;
     public url: string;
+    public userResult: any;
+
+    public currentUser = 7;
 
     constructor(http: Http, @Inject('API_URL') apiUrl: string) {
 
         this.http = http;
         this.url = apiUrl;
+        this.userResult = {} as any;
 
-        http.get(apiUrl + '/api/UserContent/7').subscribe(result => {
+        http.get(apiUrl + '/api/UserContent/' + this.currentUser).subscribe(result => {
             this.content = result.json() as contentDisplayable[];
 
-            for (let i in this.content) {
-                this.http.get(this.url + '/api/userBoards/' + this.content[i].userBoardId).subscribe(result => {
+            for (let item of this.content) {
+                this.http.get(this.url + '/api/User/' + item.userId).subscribe(result => {
+                    this.userResult = result.json();
 
-                    if (result.json() === null) {
-                        this.content[i].userName = 'No User Available';
+                    if (item.userId != this.userResult.id) {
+                        item.userName = 'No User Available';
+                    } else {
+                        item.userName = this.userResult.name;
                     }
-                    this.content[i].userName = result.json().userName;
+
+                    if (item.userId === this.currentUser) {
+                        item.editable = true;
+                    } else {
+                        item.editable = false;
+                    }
 
                 }, error => console.error(error));
             }
         }, error => console.error(error));
-
     }
 
 
@@ -51,35 +62,5 @@ interface contentDisplayable {
     websiteDescription: string,
     isPublic: boolean,
     boardName: string,
+    editable: boolean,
 }
-// also need userName of who posted
-// also need which board it's on
-// also need a way to POST this content from here
-//export class BoardComponent {
-//    public board: board;
-//    public content: content[];
-//    private selection: number | null
-
-//    constructor(route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
-
-//        this.board = {} as board;
-//        this.selection = Number(route.snapshot.paramMap.get('id'));
-
-//        http.get(apiUrl + '/api/UserBoards/' + this.selection).subscribe(result => {
-//            this.board = result.json() as board;
-
-//            http.get(apiUrl + '/api/UserContent/board/' + this.board.boardId).subscribe(result => {
-//                this.content = result.json() as content[];
-//            }, error => console.error(error));
-//        }, error => console.error(error));
-//    }
-//}
-
-//interface board {
-//    boardId: number,
-//    userName: string,
-//    userId: number,
-//    title: string,
-//    descriptionFromUser: string,
-//    isPublic: boolean,
-//}

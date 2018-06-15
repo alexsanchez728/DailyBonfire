@@ -26,7 +26,7 @@ namespace BonfireApi.Controllers
         
         // PUT: api/Boards/5
         [HttpPut("{id}")]
-        public bool Put(BoardsDto board)
+        public bool Put([FromBody]BoardsDto board)
         {
             return _repo.Put(board);
         }

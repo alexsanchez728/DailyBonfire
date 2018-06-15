@@ -5,7 +5,7 @@
         <p> Here will be chrome instructions</p>
         <p id="or-divider"> - or - </p>
         <label class="col-xs-12" for="add-button">Add Content:</label>
-        <button [routerLink]="['/newboard']" type="button" id="add-button" class="btn btn-success btn-lg">
+        <button [routerLink]="['/newcontent']" type="button" id="add-button" class="btn btn-success btn-lg">
             <span class="glyphicon glyphicon-plus"></span>
         </button>
 
@@ -33,9 +33,10 @@
 
                         <h4>{{ item.userDescription }}</h4>
                         <p><a target="_blank" href="{{ item.url }}">Link</a></p>
-                        <p><strong>From the Website: </strong>{{ item.websiteDescription }}</p>
+                        <p>{{ item.websiteDescription }}</p>
                     </div>
                     <div class="modal-footer">
+                        <!--<button *ngIf="item.editable" class="btn btn-warning" data-dismiss="modal" [routerLink]="['/editcontent', item.contentId]">Edit</button>-->
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -45,11 +46,11 @@
 
     </div>
 </div>
-<div class="col-md-6">
+<!--<div class="col-md-6">
     <h3>Popular Tags</h3>
     <button class="btn btn-default">one <span class="badge">400</span></button>
     <button class="btn btn-default">two <span class="badge">399</span></button>
     <button class="btn btn-default">threethree <span class="badge">120</span></button>
     <button class="btn btn-default">four <span class="badge">10</span></button>
     <button class="btn btn-default">five <span class="badge">1</span></button>
-</div>
+</div>-->

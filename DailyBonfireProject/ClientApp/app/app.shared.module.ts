@@ -13,6 +13,9 @@ import { MyHomeComponent } from './components/myhome/myhome.component';
 
 import { MyHomeBoardsComponent } from './components/myhomeboards/myhomeboards.component';
 
+import { NewContentComponent } from './components/newcontent/newcontent.component';
+import { EditContentComponent } from './components/Editcontent/editcontent.component';
+
 import { BoardComponent } from './components/board/board.component';
 import { EditBoardComponent } from './components/editboard/editboard.component';
 import { NewBoardComponent } from './components/newboard/newboard.component';
@@ -28,6 +31,9 @@ import { ProfileComponent } from './components/profile/profile.component';
         MyHomeComponent,
 
         MyHomeBoardsComponent,
+
+        NewContentComponent,
+        EditContentComponent,
 
         BoardComponent,
         EditBoardComponent,
@@ -46,6 +52,8 @@ import { ProfileComponent } from './components/profile/profile.component';
             { path: 'my-home-boards', component: MyHomeBoardsComponent },
             { path: 'editboard/:id', component: EditBoardComponent },
             { path: 'newboard', component: NewBoardComponent },
+            { path: 'newcontent', component: NewContentComponent },
+            { path: 'editcontent/:id', component: EditContentComponent },
             { path: 'boards/:id', component: BoardComponent },
             { path: 'profile', component: ProfileComponent },
             { path: '**', redirectTo: 'home' }

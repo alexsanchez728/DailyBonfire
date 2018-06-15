@@ -19,20 +19,25 @@ namespace DailyBonfireProject.Services
             return new SqlConnection(_config["ConnectionStrings:Bonfire"]);
         }
 
-        public bool Post(object input)
+        public ContentDto Post(ContentDto input)
         {
             using (var db = GetConnection())
             {
                 db.Open();
                 var result = db.Execute(@"Insert into Content 
                                                         ([Title]
-                                                        ,[SiteDescription]
+                                                        ,[WebsiteDescription]
                                                         ,[Url])
                                                     Values
                                                         (@title
-                                                        ,@siteDescription
+                                                        ,@WebsiteDescription
                                                         ,@url)", input);
-                return result == 1;
+
+                var createdContent = db.QueryFirstOrDefault<ContentDto>(@"select
+                                                        top 1 *
+                                                        from Content
+                                                        order by Id DESC");
+                return createdContent;
             }
         }
 

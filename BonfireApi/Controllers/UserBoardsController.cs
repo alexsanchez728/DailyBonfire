@@ -31,6 +31,14 @@ namespace BonfireApi.Controllers
             return _repo.GetById(id);
         }
 
+        // GET: api/UserBoards/By/[currentUserId]/[boardId]
+        [HttpGet("By/{currentUserId}/{boardId}", Name = "GetUserBoardByUserAndContentId")]
+        public BoardDisplayDto GetByUserAndBoardId(int currentUserId, int boardId)
+        {
+            return _repo.GetByUserAndBoardId(currentUserId, boardId);
+        }
+
+
         // GET: api/UserBoards/[currentUserId]/[userId]
         [HttpGet("{currentUserId}/{userId}", Name = "GetUserBoardsByUserId")]
         public List<BoardDisplayDto> GetByUserId(int currentUserId, int UserId)

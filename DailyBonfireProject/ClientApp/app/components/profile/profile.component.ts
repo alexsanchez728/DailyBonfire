@@ -9,6 +9,9 @@ export class ProfileComponent {
     public user: user;
 
     constructor(http: Http, @Inject('API_URL') apiUrl: string) {
+
+        this.user = {} as user;
+
         http.get(apiUrl + '/api/User/7').subscribe(result => {
             this.user = result.json() as user;
         }, error => console.error(error));

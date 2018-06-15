@@ -1,4 +1,4 @@
-﻿<form class="form-horizontal">
+﻿<form class="form-horizontal" #newcontent="ngForm" (ngSubmit)="onClickSubmit(newcontent.value)">
     <fieldset>
 
         <!-- Form Name -->
@@ -8,8 +8,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="title">Title</label>
             <div class="col-md-4">
-                <input [(ngModel)]="board.title" id="title" name="title" type="text" placeholder="placeholder" class="form-control input-md" required="">
-
+                <input id="title" name="title" type="text" placeholder="placeholder" class="form-control input-md" required ngModel>
             </div>
         </div>
 
@@ -17,7 +16,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="userDescription">Your Commentary</label>
             <div class="col-md-4">
-                <textarea [(ngModel)]="board.userDescription" class="form-control" id="userDescription" name="userDescription">default text</textarea>
+                <textarea class="form-control" id="userDescription" name="userDescription" ngModel>default text</textarea>
             </div>
         </div>
 
@@ -27,25 +26,24 @@
             <div class="col-md-4">
                 <div class="radio">
                     <label for="publicity-0">
-                        <input [(ngModel)]="board.isPublic" type="radio" name="publicity" id="publicity-0" value="true" checked="checked">
+                        <input type="radio" name="isPublic" id="publicity-0" value="true" checked="checked" ngModel>
                         Public
                     </label>
                 </div>
                 <div class="radio">
                     <label for="publicity-1">
-                        <input [(ngModel)]="board.isPublic" type="radio" name="publicity" id="publicity-1" value="false">
+                        <input type="radio" name="isPublic" id="publicity-1" value="false" ngModel>
                         Private
                     </label>
                 </div>
             </div>
         </div>
-
         <!-- Text input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="rul">Url</label>
-            <div class="col-md-4">
-                <input [(ngModel)]="board.url" id="url" name="url" type="text" placeholder="http://www.example.com" class="form-control input-md" required="">
-
+            <label class="col-md-4 control-label" for="url">Url</label>
+            <div class="col-md-4 input-group">
+                <span class="input-group-addon" id="basic-addon3">http://</span>
+                <input class="form-control input-md" id="url" name="url" type="text" placeholder="www.example.com" aria-describedby="basic-addon3" required ngModel>
             </div>
         </div>
 
@@ -53,8 +51,9 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="boardOptions">Save To Board</label>
             <div class="col-md-4">
-                <select id="boardOptions" name="boardOptions" class="form-control">
-                    <option [(ngModel)]="board.boardId" value="boardOptions.boardId">{{ boardOptions.boardId }}</option>
+                <select id="boardOptions" name="boardId" class="form-control" ngModel>
+                    <option value="">none</option>
+                    <option *ngFor="let board of boards" value="{{ board.boardId }}">{{ board.title }}</option>
                 </select>
             </div>
         </div>
@@ -63,8 +62,8 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="submit"></label>
             <div class="col-md-8">
-                <button id="submit" name="submit" class="btn btn-success" value="save" (click)="addNew">Submit</button>
-                <button id="close" name="close" class="btn btn-danger" [routerLink]="['/myhomeboards']">Nevermind</button>
+                <button class="btn btn-success" id="submit" name="submit" value="submit">Submit</button>
+                <button id="close" name="close" class="btn btn-danger" [routerLink]="['/myhome']">Nevermind</button>
             </div>
         </div>
 
