@@ -46,6 +46,7 @@ namespace DailyBonfireProject.Services
             {
                 db.Open();
                 var result = db.QueryFirstOrDefault<BoardDisplayDto>(@"Select 
+                                                                        UserBoard.Id AS Id,
                                                                         UserId, 
                                                                         BoardId, 
                                                                         IsPublic,
@@ -125,7 +126,8 @@ namespace DailyBonfireProject.Services
                 var result = db.Execute(@"Update UserBoard
                                             Set [UserId] = @UserId
                                                 ,[BoardId] = @BoardId
-                                                ,[IsPublic] = @IsPublic", userBoard);
+                                                ,[IsPublic] = @IsPublic
+                                            Where UserBoard.Id = @Id", userBoard);
                 return result == 1;
             }
         }
@@ -135,7 +137,7 @@ namespace DailyBonfireProject.Services
             using (var db = GetConnection())
             {
                 db.Open();
-                var result = db.Execute(@"Delete fron UserBoard where id = @id", new { id });
+                var result = db.Execute(@"Delete from UserBoard where id = @id", new { id });
                 return result == 1;
             }
         }

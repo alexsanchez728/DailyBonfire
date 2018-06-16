@@ -1,6 +1,7 @@
 ﻿import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'newcontent',
@@ -11,6 +12,7 @@ export class NewContentComponent {
     public contenttopost: contenttopost;
     public usercontenttopost: usercontent;
     public currentuser = 7;
+    private router: any;
 
     public http: Http;
     public url: string;
@@ -18,10 +20,11 @@ export class NewContentComponent {
     private newcontentresult: contentDto;
     private newuserboardresult: any;
 
-    constructor(http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string) {
 
         this.contenttopost = {} as contenttopost;
         this.usercontenttopost = {} as usercontent;
+        this.router = router;
 
         this.http = http;
         this.url = apiUrl;
@@ -30,6 +33,10 @@ export class NewContentComponent {
             this.boards = result.json() as boards[];
         }, error => console.error(error));
 
+    }
+
+    back() {
+        this.router.navigateByUrl('home');
     }
 
     onClickSubmit(data: any) {
@@ -56,7 +63,7 @@ export class NewContentComponent {
 
         }, error => console.error(error));
 
-
+            this.back();
         }, error => console.error(error));
 
     }

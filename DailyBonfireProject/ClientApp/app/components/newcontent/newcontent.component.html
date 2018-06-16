@@ -26,13 +26,13 @@
             <div class="col-md-4">
                 <div class="radio">
                     <label for="publicity-0">
-                        <input type="radio" name="isPublic" id="publicity-0" value="true" checked="checked" ngModel>
+                        <input type="radio" name="isPublic" id="publicity-0" value="true" (change)="change(!content.isPublic)">
                         Public
                     </label>
                 </div>
                 <div class="radio">
                     <label for="publicity-1">
-                        <input type="radio" name="isPublic" id="publicity-1" value="false" ngModel>
+                        <inputtype="radio" name="isPublic" id="publicity-1" value="false" (change)="change(content.isPublic)">
                         Private
                     </label>
                 </div>
@@ -63,7 +63,7 @@
             <label class="col-md-4 control-label" for="submit"></label>
             <div class="col-md-8">
                 <button class="btn btn-success" id="submit" name="submit" value="submit">Submit</button>
-                <button id="close" name="close" class="btn btn-danger" [routerLink]="['/myhome']">Nevermind</button>
+                <button id="close" name="close" class="btn btn-default" [routerLink]="['/myhome']">Nevermind</button>
             </div>
         </div>
 

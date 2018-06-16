@@ -1,6 +1,6 @@
 ﻿import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'editcontent',
@@ -13,17 +13,20 @@ export class EditContentComponent {
     public usercontenttoput: userContentDto;
     public contenttoput: contentDto;
     private currentuser = 7;
+    private router: any
 
     private http: Http;
     private url: string;
     private checkboxvalue: boolean;
 
-    constructor(route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
 
         this.boards = {} as board[];
         this.usercontenttoput = {} as userContentDto;
         this.contenttoput = {} as contentDto;
         this.content = {} as contentDisplayable;
+        this.router = router;
+
         this.http = http;
         this.url = apiUrl;
 
@@ -39,9 +42,11 @@ export class EditContentComponent {
             this.boards = result.json() as board[];
         }, error => console.error(error));
 
-
     }
 
+    back() {
+        this.router.navigateByUrl('my-home');
+    }
 
     change(event: any) {
         this.usercontenttoput.isPublic = event;
@@ -79,11 +84,13 @@ export class EditContentComponent {
         //            this.usercontenttopost.isPublic = data.isPublic;
 
         //            this.http.post(this.url + '/api/UserContent', this.usercontenttopost).subscribe(res => { });
-
+        this.back();
     }
 
     deleteContent(contentId: number) {
-        this.http.delete(this.url + '/api/UserContent/' + contentId).subscribe(result => { }, error => console.error(error));
+        this.http.delete(this.url + '/api/UserContent/' + contentId).subscribe(result => {
+            this.back();
+        }, error => console.error(error));
     }
 
 }

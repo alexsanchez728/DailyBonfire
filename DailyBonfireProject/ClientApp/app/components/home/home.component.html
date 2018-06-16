@@ -2,8 +2,6 @@
     <div class="container">
 
         <h2>How To: Contribute</h2>
-        <p> Here will be chrome instructions</p>
-        <p id="or-divider"> - or - </p>
         <label class="col-xs-12" for="add-button">Add Content:</label>
         <button [routerLink]="['/newcontent']" type="button" id="add-button" class="btn btn-success btn-lg">
             <span class="glyphicon glyphicon-plus"></span>
@@ -36,7 +34,7 @@
                         <p>{{ item.websiteDescription }}</p>
                     </div>
                     <div class="modal-footer">
-                        <!--<button *ngIf="item.editable" class="btn btn-warning" data-dismiss="modal" [routerLink]="['/editcontent', item.contentId]">Edit</button>-->
+                        <button *ngIf="item.editable" class="btn btn-warning" data-dismiss="modal" [routerLink]="['/editcontent', item.contentId]">Edit</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>

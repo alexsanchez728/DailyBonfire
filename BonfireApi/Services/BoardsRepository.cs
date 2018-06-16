@@ -43,7 +43,8 @@ namespace DailyBonfireProject.Services
             {
                 var result = db.Execute(@"update boards
                                                 Set [Title] = @title
-                                                    ,[DescriptionFromUser] = @DescriptionFromUser", board);
+                                                    ,[DescriptionFromUser] = @DescriptionFromUser
+                                                Where id = @id", board);
                 return result == 1;
             }
         }
