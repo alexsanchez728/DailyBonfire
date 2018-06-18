@@ -90,6 +90,7 @@ namespace DailyBonfireProject.Services
                 var results = db.Query<BoardDisplayDto>(@"Select
 		                                                        b.id AS BoardId,
 		                                                        Title,
+																[Name] AS userName,
 		                                                        DescriptionFromUser,
 		                                                        ub.id AS id,
 		                                                        IsPublic,
@@ -97,6 +98,7 @@ namespace DailyBonfireProject.Services
 	                                                        from Boards b
 	                                                        Join UserBoard ub
 	                                                            On b.Id = ub.BoardId
+															Join [User] on ub.UserId = [User].Id
 	                                                        Where
 	                                                        (case
 		                                                        when ub.IsPublic = 1 then 1

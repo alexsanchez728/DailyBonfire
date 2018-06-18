@@ -1,6 +1,6 @@
 ﻿import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'userhome',
@@ -18,7 +18,6 @@ export class UserHomeComponent {
 
         http.get(apiUrl + '/api/UserContent/see/' + this.currentUser + '/' + this.selection).subscribe(result => {
             this.content = result.json() as content[];
-            console.log(this.content);
         }, error => console.error(error));
     }
 }

@@ -11,7 +11,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserHomeComponent } from './components/userhome/userhome.component';
 
-import { MyHomeBoardsComponent } from './components/myhomeboards/myhomeboards.component';
+import { UserHomeBoardsComponent } from './components/userhomeboards/userhomeboards.component';
 
 import { NewContentComponent } from './components/newcontent/newcontent.component';
 import { EditContentComponent } from './components/Editcontent/editcontent.component';
@@ -30,7 +30,7 @@ import { ProfileComponent } from './components/profile/profile.component';
         HomeComponent,
         UserHomeComponent,
 
-        MyHomeBoardsComponent,
+        UserHomeBoardsComponent,
 
         NewContentComponent,
         EditContentComponent,
@@ -49,7 +49,7 @@ import { ProfileComponent } from './components/profile/profile.component';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'userhome/:id', component: UserHomeComponent },
-            { path: 'my-home-boards', component: MyHomeBoardsComponent },
+            { path: 'userhomeboards/:id', component: UserHomeBoardsComponent },
             { path: 'editboard/:id', component: EditBoardComponent },
             { path: 'newboard', component: NewBoardComponent },
             { path: 'newcontent', component: NewContentComponent },

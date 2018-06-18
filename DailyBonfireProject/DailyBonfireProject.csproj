@@ -26,9 +26,9 @@
     <None Remove="ClientApp\app\components\editboard\editboard.component.ts" />
     <None Remove="ClientApp\app\components\editcontent\editcontent.component.ts" />
     <None Remove="ClientApp\app\components\newboard\newboard.component.ts" />
-    <None Remove="ClientApp\app\components\myhomeboards\myhomeboards.component.ts" />
     <None Remove="ClientApp\app\components\newcontent\newcontent.component.ts" />
     <None Remove="ClientApp\app\components\profile\profile.component.ts" />
+    <None Remove="ClientApp\app\components\userhomeboards\userhomeboards.component.ts" />
     <None Remove="ClientApp\app\components\userhome\userhome.component.ts" />
   </ItemGroup>
 
@@ -41,7 +41,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\editboard\editboard.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\editcontent\editcontent.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\newboard\newboard.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\myhomeboards\myhomeboards.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\userhomeboards\userhomeboards.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\userhome\userhome.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\newcontent\newcontent.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\profile\profile.component.ts" />
