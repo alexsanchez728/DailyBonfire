@@ -11,25 +11,27 @@ export class NewContentComponent {
     public boards: boards[];
     public contenttopost: contenttopost;
     public usercontenttopost: usercontent;
+    public newcontentresult: contentDto;
     public currentuser = 7;
     private router: any;
 
     public http: Http;
     public url: string;
 
-    private newcontentresult: contentDto;
-    private newuserboardresult: any;
+    private newuserboardresult: userBoardDto;
 
     constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string) {
 
         this.contenttopost = {} as contenttopost;
         this.usercontenttopost = {} as usercontent;
+        this.boards = {} as boards[];
+        this.newuserboardresult = {} as userBoardDto;
         this.router = router;
 
         this.http = http;
         this.url = apiUrl;
 
-        http.get(apiUrl + '/api/UserBoards/' + this.currentuser + '/7').subscribe(result => {
+        http.get(apiUrl + '/api/UserBoards/' + this.currentuser + '/' + this.currentuser).subscribe(result => {
             this.boards = result.json() as boards[];
         }, error => console.error(error));
 
@@ -37,6 +39,14 @@ export class NewContentComponent {
 
     back() {
         this.router.navigateByUrl('home');
+    }
+
+    change(event: any) {
+        this.usercontenttopost.isPublic = event;
+    }
+
+    getBoardChoice(event: any) {
+        console.log(event.value);
     }
 
     onClickSubmit(data: any) {
@@ -70,12 +80,21 @@ export class NewContentComponent {
 }
 
 interface boards {
+    id: number,
     boardId: number,
     title: string,
     descriptionFromUser: string,
     isPublic: boolean,
     userName: string,
 }
+
+interface userBoardDto {
+    id: number,
+    userId: number,
+    boardId: number,
+    isPublic: boolean,
+}
+
 interface contenttopost {
     title: string,
     url: string,
@@ -86,6 +105,7 @@ interface contentDto {
     title: string,
     url: string,
 }
+
 interface usercontent {
     userId: number,
     contentId: number,
@@ -93,12 +113,3 @@ interface usercontent {
     userDescription: string,
     isPublic: boolean,
 }
-
-
-// get boards where userId = 7
-//*ngFor board in boards display boards.title
-// with a value of boards.boardId
-
-// when the user hits 'submit'
-// POST to content
-// POST to UserContent

@@ -26,13 +26,13 @@
             <div class="col-md-4">
                 <div class="radio">
                     <label for="publicity-0">
-                        <input type="radio" name="isPublic" id="publicity-0" value="true" checked="checked" (change)="change(!board.isPublic)" ngModel>
+                        <input type="radio" name="isPublic" id="publicity-0" value="true" checked="checked" (change)="change(true)" ngModel>
                         Public
                     </label>
                 </div>
                 <div class="radio">
                     <label for="publicity-1">
-                        <input type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(board.isPublic)" ngModel>
+                        <input type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(false)" ngModel>
                         Private
                     </label>
                 </div>

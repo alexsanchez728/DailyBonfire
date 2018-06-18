@@ -1,12 +1,12 @@
-﻿<h1>{{ board.title }}</h1>
-<h4>{{ board.descriptionFromUser }}</h4>
-<button class="btn btn-warning" [routerLink]="['/editboard', board.boardId]">Edit</button>
+﻿<h1>{{ userBoard.title }}</h1>
+<h4>{{ userBoard.descriptionFromUser }}</h4>
+<button class="btn btn-warning" [routerLink]="['/editboard', userBoard.boardId]">Edit</button>
 <h4>
-    Posted By:<a [routerLink]="['/user', board.userId]">{{ board.userName }}</a>
+    Posted By: <a [routerLink]="['/user', userBoard.userId]">{{ userBoard.userName }}</a>
 </h4>
 <div *ngFor="let item of content">
     <div>
-        <p>{{ item.title }}</p>
+        <p>{{ item.contentTitle }}</p>
         <p>{{ item.descriptionFromUser }}</p>
         <p>{{ item.websiteDescription }}</p>
         <a target="_blank" href="{{ item.url }}">Link</a>

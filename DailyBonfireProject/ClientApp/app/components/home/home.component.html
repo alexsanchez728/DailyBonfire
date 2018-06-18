@@ -14,7 +14,7 @@
     <h3>Latest</h3>
     <div *ngFor="let item of content; let i = index" class="list-group">
         <button type="button" class="list-group-item" data-toggle="modal" [attr.data-target]="'#content_' + i ">
-            {{item.title}}
+            {{item.contentTitle}}
         </button>
         <!-- Modal -->
         <div id="content_{{i}}" class="modal fade" role="dialog">
@@ -24,7 +24,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title">{{ item.title }}</h3>
+                        <h3 class="modal-title">{{ item.contentTitle }}</h3>
                         <h5>Posted By: {{ item.userName }}</h5>
                     </div>
                     <div class="modal-body">

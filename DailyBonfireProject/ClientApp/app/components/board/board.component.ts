@@ -8,20 +8,22 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./board.component.css']
 })
 export class BoardComponent {
-    public board: board;
-    public content: content[];
+    public userBoard: board;
+    public content: contentDisplayDto[];
+    public currentUser: number;
     private selection: number | null
 
     constructor(route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.board = {} as board;
+        this.userBoard = {} as board;
         this.selection = Number(route.snapshot.paramMap.get('id'));
+        this.currentUser = 7;
 
         http.get(apiUrl + '/api/UserBoards/' + this.selection).subscribe(result => {
-            this.board = result.json() as board;
+            this.userBoard = result.json() as board;
 
-            http.get(apiUrl + '/api/UserContent/board/' + this.board.boardId).subscribe(result => {
-                this.content = result.json() as content[];
+            http.get(apiUrl + '/api/UserContent/board/' + this.userBoard.boardId + '/' + this.currentUser).subscribe(result => {
+                this.content = result.json() as contentDisplayDto[];
             }, error => console.error(error));
         }, error => console.error(error));
     }
@@ -36,9 +38,12 @@ interface board {
     isPublic: boolean,
 }
 
-interface content {
+interface contentDisplayDto {
+    userId: number,
     contentId: number,
-    title: string,
+    contentTitle: string,
+    boardId: number,
+    boardTitle: number,
     url: string,
     descriptionFromUser: string,
     webstieDescription: string,

@@ -81,22 +81,29 @@ namespace DailyBonfireProject.Services
 
 
         // for getting all boards with this user's id
-        public List<BoardDisplayDto> GetByUserId(int currentUserId, int UserId)
+        public List<BoardDisplayDto> GetByUserId(int currentUserId, int userId)
         {
             using (var db = GetConnection())
             {
                 // get content by UserId. if this current user is not the OP, then show only this user's public boards
                 db.Open();
-                var results = db.Query<BoardDisplayDto>(@"Select * 
-                                                                From UserBoard
-                                                                Join Boards on UserBoard.BoardId = Boards.Id
-                                                                Where UserId = @UserId and 
-                                                                (case 
-	                                                                when @userid = @currentUserId then 1 
-	                                                                when UserBoard.IsPublic = 1 then 1 
-	                                                                else 0 
-                                                                end) = 1"
-                                                                , new { currentUserId, UserId });
+                var results = db.Query<BoardDisplayDto>(@"Select
+		                                                        b.id AS BoardId,
+		                                                        Title,
+		                                                        DescriptionFromUser,
+		                                                        ub.id AS id,
+		                                                        IsPublic,
+		                                                        UserId
+	                                                        from Boards b
+	                                                        Join UserBoard ub
+	                                                            On b.Id = ub.BoardId
+	                                                        Where
+	                                                        (case
+		                                                        when ub.IsPublic = 1 then 1
+		                                                        when UserId = @currentUserId then 1 
+		                                                        else 0
+	                                                        end) = 1"
+                                                                , new { currentUserId });
                 return results.ToList();
             }
         }
@@ -132,12 +139,12 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Delete(int id)
+        public bool Delete(int boardId)
         {
             using (var db = GetConnection())
             {
                 db.Open();
-                var result = db.Execute(@"Delete from UserBoard where id = @id", new { id });
+                var result = db.Execute(@"Delete from UserBoard where BoardId = @boardId", new { boardId });
                 return result == 1;
             }
         }

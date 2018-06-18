@@ -26,13 +26,13 @@
             <div class="col-md-4">
                 <div class="radio">
                     <label for="publicity-0">
-                        <input type="radio" name="isPublic" id="publicity-0" value="true" (change)="change(!content.isPublic)">
+                        <input type="radio" name="isPublic" id="publicity-0" value="true" (change)="change(true)">
                         Public
                     </label>
                 </div>
                 <div class="radio">
                     <label for="publicity-1">
-                        <inputtype="radio" name="isPublic" id="publicity-1" value="false" (change)="change(content.isPublic)">
+                        <input type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(false)">
                         Private
                     </label>
                 </div>
@@ -46,14 +46,13 @@
                 <input class="form-control input-md" id="url" name="url" type="text" placeholder="www.example.com" aria-describedby="basic-addon3" required ngModel>
             </div>
         </div>
-
+  
         <!-- Select Basic -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="boardOptions">Save To Board</label>
             <div class="col-md-4">
-                <select id="boardOptions" name="boardId" class="form-control" ngModel>
-                    <option value="">none</option>
-                    <option *ngFor="let board of boards" value="{{ board.boardId }}">{{ board.title }}</option>
+                <select id="boardOptions" name="boardId" class="form-control" (change)="getBoardChoice($event.target.value)">
+                    <option *ngFor="let board of boards">{{ board.title }}</option>
                 </select>
             </div>
         </div>
