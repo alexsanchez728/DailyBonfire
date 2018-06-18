@@ -114,6 +114,7 @@ namespace DailyBonfireProject.Services
                 var results = db.Query<ContentDisplayDto>(@"Select 
                                                                 userContent.id,
                                                                 UserId,
+	                                                            [Name] AS UserName,
                                                                 ContentId,
                                                                 UserDescription,
                                                                 IsPublic,
@@ -122,8 +123,10 @@ namespace DailyBonfireProject.Services
                                                                 [url]
                                                             From UserContent
                                                             Join Content on UserContent.ContentId = Content.Id
+                                                            Join [User] on UserContent.UserId = [User].Id
+
                                                             Where UserId = @currentUserId"
-                                                                        , new { currentUserId, UserId });
+                                                                        , new { currentUserId });
                 return results.ToList();
             }
         }

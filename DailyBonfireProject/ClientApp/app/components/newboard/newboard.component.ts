@@ -11,7 +11,7 @@ export class NewBoardComponent {
     public boardtopost: BoardsDto;
     public newuserboard: UserBoardsDto;
     public user: user;
-    private router: any
+    private router: Router;
 
     private http: Http;
     private url: string;
@@ -23,7 +23,7 @@ export class NewBoardComponent {
         this.boardtopost = {} as BoardsDto;
         this.newuserboard = {} as UserBoardsDto;
 
-        this.router = Router;
+        this.router = router;
         this.user = {} as user;
         this.http = http;
         this.url = apiUrl;

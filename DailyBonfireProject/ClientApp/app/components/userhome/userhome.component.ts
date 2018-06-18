@@ -1,18 +1,24 @@
 ﻿import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    selector: 'myhome',
-    templateUrl: './myhome.component.html'
+    selector: 'userhome',
+    templateUrl: './userhome.component.html'
 })
-export class MyHomeComponent {
+export class UserHomeComponent {
     public content: content[];
+    public selection: number;
 
     public currentUser = 7
 
-    constructor(http: Http, @Inject('API_URL') apiUrl: string) {
-        http.get(apiUrl + '/api/UserContent/see/' + this.currentUser + '/' + this.currentUser).subscribe(result => {
+    constructor(http: Http, route: ActivatedRoute, @Inject('API_URL') apiUrl: string) {
+
+        this.selection = Number(route.snapshot.paramMap.get('id'));
+
+        http.get(apiUrl + '/api/UserContent/see/' + this.currentUser + '/' + this.selection).subscribe(result => {
             this.content = result.json() as content[];
+            console.log(this.content);
         }, error => console.error(error));
     }
 }

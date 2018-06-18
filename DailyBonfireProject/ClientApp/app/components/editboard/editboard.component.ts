@@ -72,10 +72,6 @@ export class EditBoardComponent {
     deleteBoard(boardId: number) {
         if (this.userBoardSelected.userId === this.currentUser) {
 
-            // Change UserContent, anything with a UserContent.UserBoardId FK ...
-            // That matches the UserBoard.Id we're trying to delete, should be changed to null
-
-            console.log(this.url + '/api/UserContent/board/' + this.userBoardToUpdate.boardId + '/' + this.currentUser);
             this.http.get(this.url + '/api/UserContent/board/' + this.userBoardToUpdate.boardId + '/' + this.currentUser).subscribe(result => {
                 this.contentWithMatchingBoardId = result.json() as userContentDto[];
 

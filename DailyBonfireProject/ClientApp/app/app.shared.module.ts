@@ -9,7 +9,7 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 
 import { HomeComponent } from './components/home/home.component';
-import { MyHomeComponent } from './components/myhome/myhome.component';
+import { UserHomeComponent } from './components/userhome/userhome.component';
 
 import { MyHomeBoardsComponent } from './components/myhomeboards/myhomeboards.component';
 
@@ -28,7 +28,7 @@ import { ProfileComponent } from './components/profile/profile.component';
         NavMenuComponent,
 
         HomeComponent,
-        MyHomeComponent,
+        UserHomeComponent,
 
         MyHomeBoardsComponent,
 
@@ -48,7 +48,7 @@ import { ProfileComponent } from './components/profile/profile.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'my-home', component: MyHomeComponent },
+            { path: 'userhome/:id', component: UserHomeComponent },
             { path: 'my-home-boards', component: MyHomeBoardsComponent },
             { path: 'editboard/:id', component: EditBoardComponent },
             { path: 'newboard', component: NewBoardComponent },

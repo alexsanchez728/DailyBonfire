@@ -32,7 +32,7 @@
                 </div>
                 <div class="radio">
                     <label for="publicity-1">
-                        <input [checked]="!userBoardSelected.isPublic" type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(userBoardSelected.isPublic)">
+                        <input [checked]="!userBoardSelected.isPublic" type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(!userBoardSelected.isPublic)">
                         Private
                     </label>
                 </div>
