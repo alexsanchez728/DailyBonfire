@@ -12,6 +12,7 @@ export class NewBoardComponent {
     public newuserboard: UserBoardsDto;
     public user: user;
     private router: Router;
+    private currentuser = 7;
 
     private http: Http;
     private url: string;
@@ -28,13 +29,13 @@ export class NewBoardComponent {
         this.http = http;
         this.url = apiUrl;
 
-        http.get(apiUrl + '/api/User/7').subscribe(result => {
+        http.get(apiUrl + '/api/User/' + this.currentuser).subscribe(result => {
             this.user = result.json() as user;
         }, error => console.error(error));
     }
 
     back() {
-        this.router.navigateByUrl('my-home-boards');
+        this.router.navigateByUrl('userhomeboards/' + this.currentuser);
     }
 
     onClickSubmit(data: any) {

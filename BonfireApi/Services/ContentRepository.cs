@@ -47,7 +47,6 @@ namespace DailyBonfireProject.Services
             {
                 var result = db.Execute(@"update content
                                                 Set [Title] = @title
-                                                    ,[SiteDescription] = @siteDescription
                                                     ,[Url] = @url
                                                 Where id = @id", content);
                 return result == 1;

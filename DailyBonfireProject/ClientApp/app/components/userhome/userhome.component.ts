@@ -8,13 +8,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserHomeComponent {
     public content: content[];
+    public userName: string;
     public selection: number;
 
     public currentUser = 7
 
     constructor(http: Http, route: ActivatedRoute, @Inject('API_URL') apiUrl: string) {
-
+        this.content = [] as content[];
         this.selection = Number(route.snapshot.paramMap.get('id'));
+
+        http.get(apiUrl + '/api/user/' + this.selection).subscribe(res => {
+            this.userName = res.json().name;
+        });
 
         http.get(apiUrl + '/api/UserContent/see/' + this.currentUser + '/' + this.selection).subscribe(result => {
             this.content = result.json() as content[];

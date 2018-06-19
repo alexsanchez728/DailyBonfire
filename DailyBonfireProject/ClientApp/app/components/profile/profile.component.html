@@ -1,5 +1,8 @@
-﻿<h1>{{user.name}}</h1>
+﻿<p *ngIf="!user"><em>Loading...</em></p>
+<div *ngIf="user">
+    <h1>{{user.name}}</h1>
 
-<p>Bio: {{user.bio}}</p>
+    <p>Bio: {{user.bio}}</p>
 
-<p>Joined: <strong>{{ user.joinDate }}</strong></p>
+    <p>Joined: <strong>{{ user.joinDate }}</strong></p>
+</div>

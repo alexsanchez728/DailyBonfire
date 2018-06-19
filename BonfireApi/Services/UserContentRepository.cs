@@ -61,10 +61,18 @@ namespace DailyBonfireProject.Services
             {
                 db.Open();
                 // This isn't going to go thru since Id exists twice in this object, i need it to map to UC's id
-                var result = db.QueryFirstOrDefault<ContentDisplayDto>(@"Select * 
-                                                                            From UserContent
-                                                                            Join Content on UserContent.ContentId = Content.Id
-                                                                            Where Content.id = @id", new { id });
+                var result = db.QueryFirstOrDefault<ContentDisplayDto>(@"Select
+                                                                            c.id AS Id,
+                                                                            c.UserId AS userId,
+                                                                            ContentId,
+                                                                            UserDescription,
+                                                                            c.IsPublic,
+                                                                            UserBoardId,
+                                                                            content.Title AS ContentTitle,
+                                                                            [url]
+                                                                        From UserContent c
+                                                                        Join Content on c.ContentId = Content.Id
+                                                                        Where Content.id = @id", new { id });
 
                 return result;
             }
@@ -151,7 +159,7 @@ namespace DailyBonfireProject.Services
                 return result == 1;
             }
         }
-        //id = 0 WHY
+
         public bool Put(UserContentDto UserContent)
         {
             using (var db = GetConnection())
@@ -159,11 +167,10 @@ namespace DailyBonfireProject.Services
                 db.Open();
                 var result = db.Execute(@"Update UserContent
                                             Set [UserId] = @UserId
-                                                ,[ContentId] = @ContentId
                                                 ,[UserBoardId] = @UserBoardId
                                                 ,[UserDescription] = @UserDescription
                                                 ,[IsPublic] = @IsPublic
-                                            where id = @Id", UserContent);
+                                            where [Id] = @Id", UserContent);
                 return result == 1;
             }
         }
@@ -173,7 +180,7 @@ namespace DailyBonfireProject.Services
             using (var db = GetConnection())
             {
                 db.Open();
-                var result = db.Execute(@"Delete fron UserContent where id = @id", new { id });
+                var result = db.Execute(@"Delete from UserContent where ContentId = @id", new { id });
                 return result == 1;
             }
         }

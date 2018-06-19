@@ -1,4 +1,4 @@
-﻿<h1>{{ content[0].userName }}'s contributions & Saves</h1>
+﻿<h1>{{ userName }}'s contributions & Saves</h1>
 
 <p *ngIf="!content"><em>Loading...</em></p>
 <table class='table' *ngIf="content">
@@ -6,8 +6,7 @@
         <tr>
             <th>Title</th>
             <th>Url</th>
-            <th>User's Description</th>
-            <th>Website's Description</th>
+            <th>Description</th>
             <th></th>
         </tr>
     </thead>
@@ -15,10 +14,9 @@
         <tr *ngFor="let item of content">
             <td>{{ item.contentTitle }}</td>
             <td><a target="_blank" href="{{ item.url }}">Link</a></td>
-            <td>{{ item.userDescription }}</td>
-            <td>{{ item.websiteDescription }}</td>
+            <td>{{ item.userDescription }}  {{ item.websiteDescription }}</td>
             <td class="btn btn-warning" [routerLink]="['/editcontent', item.contentId]">Edit</td>
-            <td><span *ngIf="item.isPublic !== true" class="glyphicon glyphicon-lock"></span></td>
+            <td><span *ngIf="item.isPublic !== true" class="glyphicon glyphicon-eye-close"></span></td>
         </tr>
     </tbody>
 </table>

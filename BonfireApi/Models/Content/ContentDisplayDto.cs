@@ -5,7 +5,7 @@
         public int UserId { get; set; }
         public int ContentId { get; set; }
         public int Id { get; set; }
-        public int UserBoardId { get; set; }
+        public int? UserBoardId { get; set; }
         public int BoardId { get; set; }
         public string UserName { get; set; }
         public string BoardTitle { get; set; }

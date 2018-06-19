@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
     templateUrl: './newcontent.component.html'
 })
 export class NewContentComponent {
-    public boards: boards[];
+    public userboardoptions: boards[];
     public contenttopost: contenttopost;
     public usercontenttopost: usercontent;
     public newcontentresult: contentDto;
@@ -24,7 +24,7 @@ export class NewContentComponent {
 
         this.contenttopost = {} as contenttopost;
         this.usercontenttopost = {} as usercontent;
-        this.boards = {} as boards[];
+        this.userboardoptions = [] as boards[];
         this.newuserboardresult = {} as userBoardDto;
         this.router = router;
 
@@ -32,7 +32,7 @@ export class NewContentComponent {
         this.url = apiUrl;
 
         http.get(apiUrl + '/api/UserBoards/' + this.currentuser + '/' + this.currentuser).subscribe(result => {
-            this.boards = result.json() as boards[];
+            this.userboardoptions = result.json() as boards[];
         }, error => console.error(error));
 
     }
@@ -45,16 +45,10 @@ export class NewContentComponent {
         this.usercontenttopost.isPublic = event;
     }
 
-    getBoardChoice(event: any) {
-        console.log(event.value);
-    }
-
     onClickSubmit(data: any) {
 
         this.contenttopost.title = data.title;
         this.contenttopost.url = 'http://' + data.url;
-        console.log(this.url + '/api/UserBoards/By/' + this.currentuser + '/' + data.boardId);
-
 
         this.http.get(this.url + '/api/UserBoards/By/' + this.currentuser + '/' + data.boardId).subscribe(result => {
             this.newuserboardresult = result.json();
@@ -65,9 +59,8 @@ export class NewContentComponent {
 
                 this.usercontenttopost.userId = 7;
                 this.usercontenttopost.contentId = this.newcontentresult.id;
-                this.usercontenttopost.userBoardId = this.newuserboardresult.boardId;
+                this.usercontenttopost.userBoardId = data.boardId;
                 this.usercontenttopost.userDescription = data.userDescription;
-                this.usercontenttopost.isPublic = data.isPublic;
 
                 this.http.post(this.url + '/api/UserContent', this.usercontenttopost).subscribe(res => { });
 

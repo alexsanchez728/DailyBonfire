@@ -88,24 +88,24 @@ namespace DailyBonfireProject.Services
                 // get content by UserId. if this current user is not the OP, then show only this user's public boards
                 db.Open();
                 var results = db.Query<BoardDisplayDto>(@"Select
-		                                                        b.id AS BoardId,
-		                                                        Title,
-																[Name] AS userName,
-		                                                        DescriptionFromUser,
-		                                                        ub.id AS id,
-		                                                        IsPublic,
-		                                                        UserId
-	                                                        from Boards b
-	                                                        Join UserBoard ub
+	                                                            b.id AS BoardId,
+	                                                            Title,
+	                                                            [Name] AS userName,
+	                                                            DescriptionFromUser,
+	                                                            ub.id AS id,
+	                                                            IsPublic,
+	                                                            UserId
+                                                            from Boards b
+                                                            Join UserBoard ub
 	                                                            On b.Id = ub.BoardId
-															Join [User] on ub.UserId = [User].Id
-	                                                        Where
-	                                                        (case
-		                                                        when ub.IsPublic = 1 then 1
-		                                                        when UserId = @currentUserId then 1 
-		                                                        else 0
-	                                                        end) = 1"
-                                                                , new { currentUserId });
+                                                            Join [User] on ub.UserId = [User].Id
+                                                            Where 
+                                                            (case
+	                                                            when ub.UserId = @userId AND @userId = @currentUserId then 1
+	                                                            when ub.IsPublic = 1 AND ub.UserId = @userId then 1 
+	                                                            else 0
+                                                            end) = 1"
+                                                                , new { currentUserId, userId });
                 return results.ToList();
             }
         }

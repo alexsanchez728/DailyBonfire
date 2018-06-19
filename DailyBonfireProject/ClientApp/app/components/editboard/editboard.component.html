@@ -26,13 +26,13 @@
             <div class="col-md-4">
                 <div class="radio">
                     <label for="publicity-0">
-                        <input [checked]="userBoardSelected.isPublic" type="radio" name="isPublic" id="publicity-0" value="true" (change)="change(!userBoardSelected.isPublic)">
+                        <input [checked]="userBoardSelected.isPublic == true" type="radio" name="isPublic" id="publicity-0" value="true" (change)="change(!userBoardSelected.isPublic)">
                         Public
                     </label>
                 </div>
                 <div class="radio">
                     <label for="publicity-1">
-                        <input [checked]="!userBoardSelected.isPublic" type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(!userBoardSelected.isPublic)">
+                        <input [checked]="userBoardSelected.isPublic == false" type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(!userBoardSelected.isPublic)">
                         Private
                     </label>
                 </div>
@@ -44,8 +44,8 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="submit"></label>
             <div class="col-md-8">
-                <button class="btn btn-success" id="submit" name="submit" value="submit">Submit</button>
-                <button id="close" name="close" class="btn btn-default" [routerLink]="['/my-home-boards']">Nevermind</button>
+                <button class="btn btn-success" id="submit" name="submit" value="submit">Update</button>
+                <button id="close" name="close" class="btn btn-default" [routerLink]="['/userhomeboards', currentUser]">Nevermind</button>
             </div>
         </div>
 

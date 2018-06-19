@@ -50,9 +50,9 @@
         <!-- Select Basic -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="boardOptions">Save To Board</label>
-            <div class="col-md-4">
-                <select id="boardOptions" name="boardId" class="form-control" (change)="getBoardChoice($event.target.value)">
-                    <option *ngFor="let board of boards">{{ board.title }}</option>
+            <div class="col-md-4 input-group">
+                <select [(ngModel)]="newcontent.boardId" name="boardId" id="boardOptions" class="form-control">
+                    <option [ngValue]="board.id"  *ngFor="let board of userboardoptions">{{ board.title }}</option>
                 </select>
             </div>
         </div>

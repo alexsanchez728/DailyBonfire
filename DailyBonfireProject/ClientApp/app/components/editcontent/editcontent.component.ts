@@ -1,5 +1,6 @@
 ﻿import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,84 +8,77 @@ import { ActivatedRoute, Router } from '@angular/router';
     templateUrl: './editcontent.component.html',
 })
 export class EditContentComponent {
-    public boards: board[];
-    public selection: number | null;
+    public userboardoptions: userBoard[];
+    public chosenusercontentid: number;
     public content: contentDisplayable;
-    public usercontenttoput: userContentDto;
-    public contenttoput: contentDto;
+    public usercontenttoupdate: userContentDto;
+    public contenttoupdate: contentDto;
     private currentuser = 7;
     private router: any
 
     private http: Http;
     private url: string;
-    private checkboxvalue: boolean;
 
     constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.boards = {} as board[];
-        this.usercontenttoput = {} as userContentDto;
-        this.contenttoput = {} as contentDto;
+        this.userboardoptions = [] as userBoard[];
+        this.usercontenttoupdate = {} as userContentDto;
+        this.contenttoupdate = {} as contentDto;
         this.content = {} as contentDisplayable;
         this.router = router;
 
         this.http = http;
         this.url = apiUrl;
 
-        this.selection = Number(route.snapshot.paramMap.get('id'));
-
-        http.get(apiUrl + '/api/UserContent/content/' + this.selection).subscribe(result => {
+        this.chosenusercontentid = Number(route.snapshot.paramMap.get('id'));
+        http.get(apiUrl + '/api/UserContent/content/' + this.chosenusercontentid).subscribe(result => {
+            // not getting ID back, i need that to make the put request, i cant put by contentId
             this.content = result.json() as contentDisplayable;
+            this.content.url = this.content.url.replace('https://', '').replace('http://', '')
 
-            console.log(this.content);
+
         }, error => console.error(error));
 
         http.get(apiUrl + '/api/UserBoards/' + this.currentuser + '/' + this.currentuser).subscribe(result => {
-            this.boards = result.json() as board[];
+            this.userboardoptions = result.json() as userBoard[];
         }, error => console.error(error));
 
     }
 
     back() {
-        this.router.navigateByUrl('my-home');
+        this.router.navigateByUrl('userhome/' + this.currentuser);
     }
 
-    change(event: any) {
-        this.usercontenttoput.isPublic = event;
+    changePublicStatus(event: any) {
+        this.usercontenttoupdate.isPublic = event;
     }
 
+    changeUserBoard(event: any) {
+        this.usercontenttoupdate.userBoardId = event.id;
+    }
 
-    onClickSubmit(data: any) {
-        //this.usercontenttoput.userId = this.currentuser;
-        //this.usercontenttoput.userBoardId = this.boards.boardId;
-        //this.http.put(this.url + '/api/UserBoards/' + this.selection, this.userboardtoput).subscribe(result => { }, error => console.error(error));
+    onClickSubmit(data: contentDisplayable) {
 
-        //this.http.put(this.url + '/api/boards/' + this.userboardtoput.BoardId, this.boardtoput).subscribe(result => { }, error => console.error(error));
+        this.usercontenttoupdate.id = this.content.id;
+        this.usercontenttoupdate.userId = this.currentuser;
+        this.usercontenttoupdate.contentId = this.content.contentId;
+        this.usercontenttoupdate.userBoardId = data.userBoardId;
+        this.usercontenttoupdate.userDescription = data.userDescription;
 
-        //console.log(this.url + '/api/UserBoards/By/' + this.currentuser + '/' + data.boardId);
+        this.contenttoupdate.id = this.usercontenttoupdate.userBoardId;
+        this.contenttoupdate.title = data.contentTitle;
+        this.contenttoupdate.url = data.url;
 
-        //    this.contenttoput.title = data.title;
-        //    this.contenttoput.url = 'http://' + data.url;
+        this.http.put(this.url + '/api/UserContent/' + this.usercontenttoupdate.id, this.usercontenttoupdate).subscribe(result => {
 
-        //    this.boardtoput.Title = data.title;
-        //    this.boardtoput.DescriptionFromUser = data.descriptionFromUser;
+            this.http.put(this.url + '/api/Content/' + this.contenttoupdate.id, this.contenttoupdate).subscribe(result => {
 
+                this.back();
 
+            }, error => console.error(error));
 
-        //    this.http.get(this.url + '/api/UserBoards/By/' + this.currentuser + '/' + data.boardId).subscribe(result => {
-        //        this.newuserboardresult = result.json();
+        }, error => console.error(error));
 
-        //        this.http.post(this.url + '/api/Content', this.contenttopost).subscribe(res => {
-        //            this.newcontentresult = res.json()
-
-
-        //            this.usercontenttopost.userId = 7;
-        //            this.usercontenttopost.contentId = this.newcontentresult.id;
-        //            this.usercontenttopost.userBoardId = this.newuserboardresult.boardId;
-        //            this.usercontenttopost.userDescription = data.userDescription;
-        //            this.usercontenttopost.isPublic = data.isPublic;
-
-        //            this.http.post(this.url + '/api/UserContent', this.usercontenttopost).subscribe(res => { });
-        this.back();
     }
 
     deleteContent(contentId: number) {
@@ -95,23 +89,21 @@ export class EditContentComponent {
 
 }
 
-interface board {
-    boardId: number,
+interface userBoard {
+    id: number | null,
+    boardId: number | null,
     title: string,
 }
 
 interface contentDisplayable {
+    id: number,
     userId: number,
     contentId: number,
     userBoardId: number,
-    userName: string,
     contentTitle: string,
-    boardTitle: string,
     url: string,
     userDescription: string,
-    websiteDescription: string,
     isPublic: boolean,
-    boardName: string,
 }
 
 interface contentDto {

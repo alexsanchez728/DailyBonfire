@@ -49,7 +49,7 @@ export class EditBoardComponent {
     }
 
     back() {
-        this.router.navigateByUrl('my-home-boards');
+        this.router.navigateByUrl('userhomeboards/' + this.currentUser);
     }
 
     onClickSubmit(data: any) {
@@ -61,9 +61,12 @@ export class EditBoardComponent {
 
         this.http.put(this.url + '/api/UserBoards/' + this.selection, this.userBoardToUpdate).subscribe(result => {
 
-            this.http.put(this.url + '/api/boards/' + this.userBoardToUpdate.boardId, this.boardToUpdate).subscribe(result => { }, error => console.error(error));
+            this.http.put(this.url + '/api/boards/' + this.userBoardToUpdate.boardId, this.boardToUpdate).subscribe(result => {
 
-            this.back();
+                this.back();
+
+            }, error => console.error(error));
+
         }, error => console.error(error));
 
 
