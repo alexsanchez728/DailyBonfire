@@ -1,0 +1,54 @@
+﻿<form class="form-horizontal" #updateboard="ngForm" (ngSubmit)="onClickSubmit(updateboard.value)">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Edit Board</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="title">Title</label>
+            <div class="col-md-4">
+                <input [(ngModel)]="userBoardSelected.title" id="title" name="title" type="text" placeholder="placeholder" class="form-control input-md">
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="descriptionFromUser">Your Commentary</label>
+            <div class="col-md-4">
+                <textarea [(ngModel)]="userBoardSelected.descriptionFromUser" class="form-control" id="descriptionFromUser" name="descriptionFromUser"></textarea>
+            </div>
+        </div>
+
+        <!-- Multiple Radios -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="publicity">Public/Private</label>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label for="publicity-0">
+                        <input [checked]="userBoardSelected.isPublic == true" type="radio" name="isPublic" id="publicity-0" value="true" (change)="change(!userBoardSelected.isPublic)">
+                        Public
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="publicity-1">
+                        <input [checked]="userBoardSelected.isPublic == false" type="radio" name="isPublic" id="publicity-1" value="false" (change)="change(!userBoardSelected.isPublic)">
+                        Private
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-8">
+                <button class="btn btn-success" id="submit" name="submit" value="submit">Update</button>
+                <button id="close" name="close" class="btn btn-default" [routerLink]="['/userhomeboards', currentUser]">Nevermind</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+<button class="btn btn-danger" id="delete" name="delete" (click)="deleteBoard(userBoardSelected.id)">DELETE BOARD</button>

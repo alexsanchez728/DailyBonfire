@@ -43,7 +43,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Post(object input)
+        public bool AddNewUser(object input)
         {
             using (var db = GetConnection())
             {
@@ -58,7 +58,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Put(UsersDto user)
+        public bool UpdateUser(UsersDto user)
         {
             using (var db = GetConnection())
             {
@@ -71,7 +71,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Delete(int id)
+        public bool DeleteUser(int id)
         {
             using (var db = GetConnection())
             {

@@ -21,6 +21,32 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\app\components\board\board.component.ts" />
+    <None Remove="ClientApp\app\components\editboard\editboard.component.ts" />
+    <None Remove="ClientApp\app\components\editcontent\editcontent.component.ts" />
+    <None Remove="ClientApp\app\components\newboard\newboard.component.ts" />
+    <None Remove="ClientApp\app\components\newcontent\newcontent.component.ts" />
+    <None Remove="ClientApp\app\components\profile\profile.component.ts" />
+    <None Remove="ClientApp\app\components\userhomeboards\userhomeboards.component.ts" />
+    <None Remove="ClientApp\app\components\userhome\userhome.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BonfireApi\BonfireApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\board\board.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\editboard\editboard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\editcontent\editcontent.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\newboard\newboard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\userhomeboards\userhomeboards.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\userhome\userhome.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\newcontent\newcontent.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\profile\profile.component.ts" />
+  </ItemGroup>
+
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

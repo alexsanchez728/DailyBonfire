@@ -1,17 +1,27 @@
-<div class="jumbotron text-center">
-    <div class="container">
+﻿<h1>{{ userName }}'s contributions & Saves</h1>
 
-        <h2>How To: Contribute</h2>
-        <label class="col-xs-12" for="add-button">Add Content:</label>
-        <button [routerLink]="['/newcontent']" type="button" id="add-button" class="btn btn-success btn-lg">
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
+<p *ngIf="!content"><em>Loading...</em></p>
+<!--<table class='table' *ngIf="content">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Url</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of content">
+            <td>{{ item.contentTitle }}</td>
+            <td><a target="_blank" href="{{ item.url }}">Link</a></td>
+            <td>{{ item.userDescription }}  {{ item.websiteDescription }}</td>
+            <td *ngIf="editable" class="btn btn-warning" [routerLink]="['/editcontent', item.contentId]">Edit</td>
+            <td><span *ngIf="item.isPublic !== true" class="glyphicon glyphicon-eye-close"></span></td>
+        </tr>
+    </tbody>
+</table>-->
 
-    </div>
-</div>
-
-<div class="col-xs-offset-1 col-xs-10">
-    <h3>Latest</h3>
+<div *ngIf="content" class="col-xs-offset-1 col-xs-10">
     <div *ngFor="let item of content; let i = index" class="list-group">
         <button type="button" class="list-group-item" data-toggle="modal" [attr.data-target]="'#content_' + i ">
             <span *ngIf="!item.isPublic && item.editable" class="glyphicon glyphicon-eye-close"></span>
@@ -29,13 +39,11 @@
                         <h5>Posted By: <a data-dismiss="modal" [routerLink]="['/userhomeboards', item.userId]">{{ item.userName }}</a></h5>
                     </div>
                     <div class="modal-body">
-
-                        <h4>{{ item.userDescription }}</h4>
                         <p><a target="_blank" href="{{ item.url }}">Link</a></p>
-                        <p>{{ item.websiteDescription }}</p>
+                        <h4>{{ item.userDescription }}  {{ item.websiteDescription }}</h4>
                     </div>
                     <div class="modal-footer">
-                        <button *ngIf="item.editable" class="btn btn-warning" data-dismiss="modal" [routerLink]="['/editcontent', item.contentId]">Edit</button>
+                        <button *ngIf="editable" class="btn btn-warning" data-dismiss="modal" [routerLink]="['/editcontent', item.contentId]">Edit</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -45,3 +53,4 @@
 
     </div>
 </div>
+<div *ngIf="!content">Nothing to see here folks ...</div>

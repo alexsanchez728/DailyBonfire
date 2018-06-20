@@ -4,13 +4,14 @@ import { AppModuleShared } from './app.shared.module';
 import { AppComponent } from './components/app/app.component';
 
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent],
     imports: [
         BrowserModule,
         AppModuleShared
     ],
     providers: [
-        { provide: 'BASE_URL', useFactory: getBaseUrl }
+        { provide: 'BASE_URL', useFactory: getBaseUrl },
+        { provide: 'API_URL', useValue: 'http://localhost:54536' }
     ]
 })
 export class AppModule {

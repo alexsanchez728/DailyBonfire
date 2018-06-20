@@ -1,7 +1,6 @@
 ﻿using DailyBonfireProject.Models;
 using DailyBonfireProject.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace BonfireApi.Controllers
 {
@@ -18,23 +17,23 @@ namespace BonfireApi.Controllers
 
         // POST api/content
         [HttpPost]
-        public bool Post(object input)
+        public ContentDto Post([FromBody]ContentDto input)
         {
-            return _repo.Post(input);
+            return _repo.AddNewContent(input);
         }
 
         // PUT api/content/5
         [HttpPut("{id}")]
         public bool Put(ContentDto content)
         {
-            return _repo.Put(content);
+            return _repo.UpdateContent(content);
         }
 
         // DELETE api/content/5
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
-            return _repo.Delete(id);
+            return _repo.DeleteContent(id);
         }
     }
 }

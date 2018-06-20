@@ -17,18 +17,26 @@ namespace BonfireApi.Controllers
         }
 
         // GET: api/UserBoards/visible/5
-        [HttpGet("visible/{userId}", Name = "GetAllPublicBoards")]
+        [HttpGet("visible/{userId}", Name = "GetAllPublicAndYourPrivateBoards")]
         public List<BoardDisplayDto> Getvisible(int userId)
         {
             return _repo.GetContentVisibleToYou(userId);
         }
 
         // GET: api/UserBoards/5
-        [HttpGet("{id}", Name = "GetUserBoardsById")]
+        [HttpGet("{id}", Name = "GetUserBoardsByBoardId")]
         public BoardDisplayDto Get(int id)
         {
             return _repo.GetById(id);
         }
+
+        // GET: api/UserBoards/By/[currentUserId]/[boardId]
+        [HttpGet("By/{currentUserId}/{boardId}", Name = "GetUserBoardByUserIdAndBoardId")]
+        public BoardDisplayDto GetByUserAndBoardId(int currentUserId, int boardId)
+        {
+            return _repo.GetByUserAndBoardId(currentUserId, boardId);
+        }
+
 
         // GET: api/UserBoards/[currentUserId]/[userId]
         [HttpGet("{currentUserId}/{userId}", Name = "GetUserBoardsByUserId")]
@@ -39,23 +47,23 @@ namespace BonfireApi.Controllers
 
         // POST: api/UserBoards
         [HttpPost]
-        public bool Post([FromBody]object input)
+        public bool Post([FromBody]UserBoardsDto input)
         {
-            return _repo.Post(input);
+            return _repo.AddNewUserBoard(input);
         }
         
         // PUT: api/UserBoards/5
         [HttpPut("{id}")]
         public bool Put([FromBody]UserBoardsDto userBoard)
         {
-            return _repo.Put(userBoard);
+            return _repo.UpdateUserBoard(userBoard);
         }
         
         // DELETE: api/UserBoards/5
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
-            return _repo.Delete(id);
+            return _repo.DeleteUserBoard(id);
         }
     }
 }

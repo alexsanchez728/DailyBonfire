@@ -2,21 +2,44 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
+
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
+
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { UserHomeComponent } from './components/userhome/userhome.component';
+
+import { UserHomeBoardsComponent } from './components/userhomeboards/userhomeboards.component';
+
+import { NewContentComponent } from './components/newcontent/newcontent.component';
+import { EditContentComponent } from './components/Editcontent/editcontent.component';
+
+import { BoardComponent } from './components/board/board.component';
+import { EditBoardComponent } from './components/editboard/editboard.component';
+import { NewBoardComponent } from './components/newboard/newboard.component';
+
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
-        HomeComponent
+
+        HomeComponent,
+        UserHomeComponent,
+
+        UserHomeBoardsComponent,
+
+        NewContentComponent,
+        EditContentComponent,
+
+        BoardComponent,
+        EditBoardComponent,
+        NewBoardComponent,
+
+        ProfileComponent
     ],
     imports: [
         CommonModule,
@@ -25,8 +48,14 @@ import { CounterComponent } from './components/counter/counter.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'userhome/:id', component: UserHomeComponent },
+            { path: 'userhomeboards/:id', component: UserHomeBoardsComponent },
+            { path: 'editboard/:id', component: EditBoardComponent },
+            { path: 'newboard', component: NewBoardComponent },
+            { path: 'newcontent', component: NewContentComponent },
+            { path: 'editcontent/:id', component: EditContentComponent },
+            { path: 'boards/:id', component: BoardComponent },
+            { path: 'profile', component: ProfileComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -17,24 +17,24 @@ namespace BonfireApi.Controllers
 
         // POST: api/Boards
         [HttpPost]
-        public bool Post(object input)
+        public BoardsDto Post([FromBody]BoardsDto input)
         {
-            return _repo.Post(input);
+            return _repo.AddNewBoard(input);
 
         }
         
         // PUT: api/Boards/5
         [HttpPut("{id}")]
-        public bool Put(BoardsDto board)
+        public bool Put([FromBody]BoardsDto board)
         {
-            return _repo.Put(board);
+            return _repo.UpdateBoard(board);
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Boards/5
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
-            return _repo.Delete(id);
+            return _repo.DeleteBoard(id);
         }
     }
 }

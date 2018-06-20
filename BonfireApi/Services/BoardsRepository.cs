@@ -18,37 +18,42 @@ namespace DailyBonfireProject.Services
         {
             return new SqlConnection(_config["ConnectionStrings:Bonfire"]);
         }
-        public bool Post(object input)
+        public BoardsDto AddNewBoard(BoardsDto input)
         {
             using (var db = GetConnection())
             {
                 db.Open();
                 var result = db.Execute(@"Insert into boards 
                                                         ([Title]
-                                                        ,[DescriptionFromSite]
+                                                        ,[DescriptionFromUser])
                                                     Values
-                                                        (@title
-                                                        ,@DescriptionFromSite)", input);
-                return result == 1;
+                                                        (@Title
+                                                        ,@DescriptionFromUser)", input);
+                var createdBoard = db.QueryFirstOrDefault<BoardsDto>(@"select
+                                                        top 1 *
+                                                        from boards
+                                                        order by Id DESC");
+                return createdBoard;
             }
         }
 
-        public bool Put(BoardsDto boards)
+        public bool UpdateBoard(BoardsDto board)
         {
             using (var db = GetConnection())
             {
                 var result = db.Execute(@"update boards
                                                 Set [Title] = @title
-                                                    ,[DescriptionFromSite] = @DescriptionFromSite", boards);
+                                                    ,[DescriptionFromUser] = @DescriptionFromUser
+                                                Where id = @id", board);
                 return result == 1;
             }
         }
 
-        public bool Delete(int id)
+        public bool DeleteBoard(int boardId)
         {
             using (var db = GetConnection())
             {
-                var result = db.Execute(@"delete from boards where id = @id", new { id });
+                var result = db.Execute(@"delete from boards where id = @boardId", new { boardId });
                 return result == 1;
             }
         }

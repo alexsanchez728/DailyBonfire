@@ -19,37 +19,41 @@ namespace DailyBonfireProject.Services
             return new SqlConnection(_config["ConnectionStrings:Bonfire"]);
         }
 
-        public bool Post(object input)
+        public ContentDto AddNewContent(ContentDto input)
         {
             using (var db = GetConnection())
             {
                 db.Open();
                 var result = db.Execute(@"Insert into Content 
                                                         ([Title]
-                                                        ,[SiteDescription]
+                                                        ,[WebsiteDescription]
                                                         ,[Url])
                                                     Values
                                                         (@title
-                                                        ,@siteDescription
+                                                        ,@WebsiteDescription
                                                         ,@url)", input);
-                return result == 1;
+
+                var createdContent = db.QueryFirstOrDefault<ContentDto>(@"select
+                                                        top 1 *
+                                                        from Content
+                                                        order by Id DESC");
+                return createdContent;
             }
         }
 
-        public bool Put(ContentDto content)
+        public bool UpdateContent(ContentDto content)
         {
             using (var db = GetConnection())
             {
                 var result = db.Execute(@"update content
                                                 Set [Title] = @title
-                                                    ,[SiteDescription] = @siteDescription
                                                     ,[Url] = @url
                                                 Where id = @id", content);
                 return result == 1;
             }
         }
 
-        public bool Delete(int id)
+        public bool DeleteContent(int id)
         {
             using (var db = GetConnection())
             {

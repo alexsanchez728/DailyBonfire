@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DailyBonfireProject.Models;
 using DailyBonfireProject.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonfireApi.Controllers
@@ -23,10 +24,17 @@ namespace BonfireApi.Controllers
         }
 
         // GET: api/UserContent/content/5
-        [HttpGet("content/{id}", Name = "GetContentById")]
+        [HttpGet("content/{id}", Name = "GetContentByContentId")]
         public ContentDisplayDto GetById(int id)
         {
             return _repo.GetById(id);
+        }
+
+        // GET: api/UserContent/board/5/7
+        [HttpGet("board/{boardId}/{userId}", Name = "GetContentByBoardId")]
+        public List<ContentDisplayDto> GetByBoardId(int boardId, int userId)
+        {
+            return _repo.GetByBoardId(boardId, userId);
         }
 
         // GET: api/UserContent/see/[currentUserId]/[userId]
@@ -39,23 +47,23 @@ namespace BonfireApi.Controllers
 
         // POST: api/UserContent
         [HttpPost]
-        public bool Post([FromBody]object input)
+        public bool Post([FromBody]UserContentDto input)
         {
-            return _repo.Post(input);
+            return _repo.AddNewUserContent(input);
         }
         
         // PUT: api/UserContent/5
         [HttpPut("{id}")]
         public bool Put([FromBody]UserContentDto userContent)
         {
-            return _repo.Put(userContent);
+            return _repo.UpdateUserContent(userContent);
         }
         
         // DELETE: api/UserContent/5
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
-            return _repo.Delete(id);
+            return _repo.DeleteUserContent(id);
         }
     }
 }
