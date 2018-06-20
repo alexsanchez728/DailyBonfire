@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './userhomeboards.component.html',
 })
 export class UserHomeBoardsComponent {
-    public boards: boards[];
+    public boards: Boards[];
     public userName: string;
     public selection: number;
 
@@ -21,7 +21,7 @@ export class UserHomeBoardsComponent {
         });
 
         http.get(apiUrl + '/api/UserBoards/' + this.currentUser + '/' + this.selection).subscribe(result => {
-            this.boards = result.json() as boards[];
+            this.boards = result.json() as Boards[];
         }, error => console.error(error));
     }
 
@@ -31,7 +31,7 @@ export class UserHomeBoardsComponent {
 }
 
 
-interface boards {
+interface Boards {
     id: number,
     boardId: number,
     userName: string,

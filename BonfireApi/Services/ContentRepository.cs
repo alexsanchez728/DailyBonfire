@@ -19,7 +19,7 @@ namespace DailyBonfireProject.Services
             return new SqlConnection(_config["ConnectionStrings:Bonfire"]);
         }
 
-        public ContentDto Post(ContentDto input)
+        public ContentDto AddNewContent(ContentDto input)
         {
             using (var db = GetConnection())
             {
@@ -41,7 +41,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Put(ContentDto content)
+        public bool UpdateContent(ContentDto content)
         {
             using (var db = GetConnection())
             {
@@ -53,7 +53,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Delete(int id)
+        public bool DeleteContent(int id)
         {
             using (var db = GetConnection())
             {

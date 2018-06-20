@@ -24,7 +24,7 @@ namespace BonfireApi.Controllers
         }
 
         // GET: api/UserContent/content/5
-        [HttpGet("content/{id}", Name = "GetContentById")]
+        [HttpGet("content/{id}", Name = "GetContentByContentId")]
         public ContentDisplayDto GetById(int id)
         {
             return _repo.GetById(id);
@@ -49,21 +49,21 @@ namespace BonfireApi.Controllers
         [HttpPost]
         public bool Post([FromBody]UserContentDto input)
         {
-            return _repo.Post(input);
+            return _repo.AddNewUserContent(input);
         }
         
         // PUT: api/UserContent/5
         [HttpPut("{id}")]
         public bool Put([FromBody]UserContentDto userContent)
         {
-            return _repo.Put(userContent);
+            return _repo.UpdateUserContent(userContent);
         }
         
         // DELETE: api/UserContent/5
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
-            return _repo.Delete(id);
+            return _repo.DeleteUserContent(id);
         }
     }
 }

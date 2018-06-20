@@ -8,28 +8,32 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./board.component.css']
 })
 export class BoardComponent {
-    public userBoard: board;
-    public content: contentDisplayDto[];
+    public userBoard: Board;
+    public content: ContentDisplayDto[];
     public currentUser: number;
-    private selection: number | null
+    private selection: number;
+    public editable: boolean;
 
     constructor(route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.userBoard = {} as board;
+        this.userBoard = {} as Board;
         this.selection = Number(route.snapshot.paramMap.get('id'));
         this.currentUser = 7;
 
         http.get(apiUrl + '/api/UserBoards/' + this.selection).subscribe(result => {
-            this.userBoard = result.json() as board;
+            this.userBoard = result.json() as Board;
 
             http.get(apiUrl + '/api/UserContent/board/' + this.userBoard.boardId + '/' + this.currentUser).subscribe(result => {
-                this.content = result.json() as contentDisplayDto[];
+                this.content = result.json() as ContentDisplayDto[];
+
+                return this.currentUser == this.selection ? this.editable = true : this.editable = false;
+
             }, error => console.error(error));
         }, error => console.error(error));
     }
 }
 
-interface board {
+interface Board {
     boardId: number,
     userName: string,
     userId: number,
@@ -38,7 +42,7 @@ interface board {
     isPublic: boolean,
 }
 
-interface contentDisplayDto {
+interface ContentDisplayDto {
     userId: number,
     contentId: number,
     contentTitle: string,

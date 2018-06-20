@@ -104,7 +104,6 @@ namespace DailyBonfireProject.Services
 		                                                            On ub.Id = c.UserBoardId
 	                                                            Join [User] on c.UserId = [User].Id
                                                                 Join Content on c.ContentId = Content.Id
-
 	                                                            Where b.id = @boardId
 	                                                            and c.UserId = @userId", new { boardId, userId });
 
@@ -113,33 +112,37 @@ namespace DailyBonfireProject.Services
         }
 
         // when the user wants to see all content a user (themselves included) has saved
-        public List<ContentDisplayDto> GetByUserId(int currentUserId, int UserId)
+        public List<ContentDisplayDto> GetByUserId(int currentUserId, int userId)
         {
             using (var db = GetConnection())
             {
                 // get content by UserId. if this current user is not the OP, then show only this user's public content
                 db.Open();
                 var results = db.Query<ContentDisplayDto>(@"Select 
-                                                                userContent.id,
-                                                                UserId,
-	                                                            [Name] AS UserName,
-                                                                ContentId,
-                                                                UserDescription,
-                                                                IsPublic,
-                                                                title AS ContentTitle,
-                                                                WebsiteDescription,
-                                                                [url]
-                                                            From UserContent
-                                                            Join Content on UserContent.ContentId = Content.Id
-                                                            Join [User] on UserContent.UserId = [User].Id
+                                                                    uc.id,
+                                                                    UserId,
+	                                                                [Name] AS UserName,
+                                                                    ContentId,
+                                                                    UserDescription,
+                                                                    IsPublic,
+                                                                    title AS ContentTitle,
+                                                                    WebsiteDescription,
+                                                                    [url]
+                                                                From UserContent uc
+                                                                Join Content on uc.ContentId = Content.Id
+                                                                Join [User] on uc.UserId = [User].Id
 
-                                                            Where UserId = @currentUserId"
-                                                                        , new { currentUserId });
+                                                                Where 
+                                                                (case
+	                                                                when uc.UserId = @userId AND @userId = @currentUserId then 1
+	                                                                when uc.IsPublic = 1 AND uc.UserId = @userId then 1 
+	                                                                else 0
+                                                                end) = 1", new { currentUserId, userId });
                 return results.ToList();
             }
         }
 
-        public bool Post(UserContentDto input)
+        public bool AddNewUserContent(UserContentDto input)
         {
             using (var db = GetConnection())
             {
@@ -160,7 +163,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Put(UserContentDto UserContent)
+        public bool UpdateUserContent(UserContentDto UserContent)
         {
             using (var db = GetConnection())
             {
@@ -175,7 +178,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Delete(int id)
+        public bool DeleteUserContent(int id)
         {
             using (var db = GetConnection())
             {

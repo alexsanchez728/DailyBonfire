@@ -8,12 +8,12 @@ import { ActivatedRoute, Router } from '@angular/router';
     templateUrl: './editcontent.component.html',
 })
 export class EditContentComponent {
-    public userboardoptions: userBoard[];
-    public chosenusercontentid: number;
-    public content: contentDisplayable;
-    public usercontenttoupdate: userContentDto;
-    public contenttoupdate: contentDto;
-    private currentuser = 7;
+    public userBoardOptions: UserBoard[];
+    public chosenUserContentId: number;
+    public content: ContentDisplayable;
+    public userContentToUpdate: UserContentDto;
+    public contentToUpdate: ContentDto;
+    private currentUser = 7;
     private router: any
 
     private http: Http;
@@ -21,57 +21,56 @@ export class EditContentComponent {
 
     constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.userboardoptions = [] as userBoard[];
-        this.usercontenttoupdate = {} as userContentDto;
-        this.contenttoupdate = {} as contentDto;
-        this.content = {} as contentDisplayable;
+        this.userBoardOptions = [] as UserBoard[];
+        this.userContentToUpdate = {} as UserContentDto;
+        this.contentToUpdate = {} as ContentDto;
+        this.content = {} as ContentDisplayable;
         this.router = router;
 
         this.http = http;
         this.url = apiUrl;
 
-        this.chosenusercontentid = Number(route.snapshot.paramMap.get('id'));
-        http.get(apiUrl + '/api/UserContent/content/' + this.chosenusercontentid).subscribe(result => {
-            // not getting ID back, i need that to make the put request, i cant put by contentId
-            this.content = result.json() as contentDisplayable;
+        this.chosenUserContentId = Number(route.snapshot.paramMap.get('id'));
+        http.get(apiUrl + '/api/UserContent/content/' + this.chosenUserContentId).subscribe(result => {
+            this.content = result.json() as ContentDisplayable;
             this.content.url = this.content.url.replace('https://', '').replace('http://', '')
 
 
         }, error => console.error(error));
 
-        http.get(apiUrl + '/api/UserBoards/' + this.currentuser + '/' + this.currentuser).subscribe(result => {
-            this.userboardoptions = result.json() as userBoard[];
+        http.get(apiUrl + '/api/UserBoards/' + this.currentUser + '/' + this.currentUser).subscribe(result => {
+            this.userBoardOptions = result.json() as UserBoard[];
         }, error => console.error(error));
 
     }
 
     back() {
-        this.router.navigateByUrl('userhome/' + this.currentuser);
+        this.router.navigateByUrl('userhome/' + this.currentUser);
     }
 
     changePublicStatus(event: any) {
-        this.usercontenttoupdate.isPublic = event;
+        this.userContentToUpdate.isPublic = event;
     }
 
     changeUserBoard(event: any) {
-        this.usercontenttoupdate.userBoardId = event.id;
+        this.userContentToUpdate.userBoardId = event.id;
     }
 
-    onClickSubmit(data: contentDisplayable) {
+    onClickSubmit(data: ContentDisplayable) {
 
-        this.usercontenttoupdate.id = this.content.id;
-        this.usercontenttoupdate.userId = this.currentuser;
-        this.usercontenttoupdate.contentId = this.content.contentId;
-        this.usercontenttoupdate.userBoardId = data.userBoardId;
-        this.usercontenttoupdate.userDescription = data.userDescription;
+        this.userContentToUpdate.id = this.content.id;
+        this.userContentToUpdate.userId = this.currentUser;
+        this.userContentToUpdate.contentId = this.content.contentId;
+        this.userContentToUpdate.userBoardId = data.userBoardId;
+        this.userContentToUpdate.userDescription = data.userDescription;
 
-        this.contenttoupdate.id = this.usercontenttoupdate.userBoardId;
-        this.contenttoupdate.title = data.contentTitle;
-        this.contenttoupdate.url = data.url;
+        this.contentToUpdate.id = this.userContentToUpdate.userBoardId;
+        this.contentToUpdate.title = data.contentTitle;
+        this.contentToUpdate.url = data.url;
 
-        this.http.put(this.url + '/api/UserContent/' + this.usercontenttoupdate.id, this.usercontenttoupdate).subscribe(result => {
+        this.http.put(this.url + '/api/UserContent/' + this.userContentToUpdate.id, this.userContentToUpdate).subscribe(result => {
 
-            this.http.put(this.url + '/api/Content/' + this.contenttoupdate.id, this.contenttoupdate).subscribe(result => {
+            this.http.put(this.url + '/api/Content/' + this.contentToUpdate.id, this.contentToUpdate).subscribe(result => {
 
                 this.back();
 
@@ -89,13 +88,13 @@ export class EditContentComponent {
 
 }
 
-interface userBoard {
+interface UserBoard {
     id: number | null,
     boardId: number | null,
     title: string,
 }
 
-interface contentDisplayable {
+interface ContentDisplayable {
     id: number,
     userId: number,
     contentId: number,
@@ -106,13 +105,13 @@ interface contentDisplayable {
     isPublic: boolean,
 }
 
-interface contentDto {
+interface ContentDto {
     id: number,
     title: string,
     url: string,
 }
 
-interface userContentDto {
+interface UserContentDto {
     id: number,
     userId: number,
     contentId: number,

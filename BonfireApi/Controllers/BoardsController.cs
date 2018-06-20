@@ -1,6 +1,5 @@
 ﻿using DailyBonfireProject.Models;
 using DailyBonfireProject.Services;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonfireApi.Controllers
@@ -20,7 +19,7 @@ namespace BonfireApi.Controllers
         [HttpPost]
         public BoardsDto Post([FromBody]BoardsDto input)
         {
-            return _repo.Post(input);
+            return _repo.AddNewBoard(input);
 
         }
         
@@ -28,14 +27,14 @@ namespace BonfireApi.Controllers
         [HttpPut("{id}")]
         public bool Put([FromBody]BoardsDto board)
         {
-            return _repo.Put(board);
+            return _repo.UpdateBoard(board);
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Boards/5
         [HttpDelete("{id}")]
         public bool Delete(int id)
         {
-            return _repo.Delete(id);
+            return _repo.DeleteBoard(id);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace DailyBonfireProject.Services
         {
             return new SqlConnection(_config["ConnectionStrings:Bonfire"]);
         }
-        public BoardsDto Post(BoardsDto input)
+        public BoardsDto AddNewBoard(BoardsDto input)
         {
             using (var db = GetConnection())
             {
@@ -37,7 +37,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Put(BoardsDto board)
+        public bool UpdateBoard(BoardsDto board)
         {
             using (var db = GetConnection())
             {
@@ -49,11 +49,11 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Delete(int id)
+        public bool DeleteBoard(int boardId)
         {
             using (var db = GetConnection())
             {
-                var result = db.Execute(@"delete from boards where id = @id", new { id });
+                var result = db.Execute(@"delete from boards where id = @boardId", new { boardId });
                 return result == 1;
             }
         }

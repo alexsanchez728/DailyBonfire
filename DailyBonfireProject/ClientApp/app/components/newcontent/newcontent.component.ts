@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
     templateUrl: './newcontent.component.html'
 })
 export class NewContentComponent {
-    public userboardoptions: boards[];
-    public contenttopost: contenttopost;
-    public usercontenttopost: usercontent;
-    public newcontentresult: contentDto;
-    public currentuser = 7;
+    public userBoardOptions: Boards[];
+    public contentToPost: ContentToPost;
+    public userContentToPost: UserContent;
+    public newContentResult: ContentDto;
+    public currentUser = 7;
     private router: any;
 
     public http: Http;
@@ -22,17 +22,17 @@ export class NewContentComponent {
 
     constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.contenttopost = {} as contenttopost;
-        this.usercontenttopost = {} as usercontent;
-        this.userboardoptions = [] as boards[];
+        this.contentToPost = {} as ContentToPost;
+        this.userContentToPost = {} as UserContent;
+        this.userBoardOptions = [] as Boards[];
         this.newuserboardresult = {} as userBoardDto;
         this.router = router;
 
         this.http = http;
         this.url = apiUrl;
 
-        http.get(apiUrl + '/api/UserBoards/' + this.currentuser + '/' + this.currentuser).subscribe(result => {
-            this.userboardoptions = result.json() as boards[];
+        http.get(apiUrl + '/api/UserBoards/' + this.currentUser + '/' + this.currentUser).subscribe(result => {
+            this.userBoardOptions = result.json() as Boards[];
         }, error => console.error(error));
 
     }
@@ -42,27 +42,27 @@ export class NewContentComponent {
     }
 
     change(event: any) {
-        this.usercontenttopost.isPublic = event;
+        this.userContentToPost.isPublic = event;
     }
 
     onClickSubmit(data: any) {
 
-        this.contenttopost.title = data.title;
-        this.contenttopost.url = 'http://' + data.url;
+        this.contentToPost.title = data.title;
+        this.contentToPost.url = 'http://' + data.url;
 
-        this.http.get(this.url + '/api/UserBoards/By/' + this.currentuser + '/' + data.boardId).subscribe(result => {
+        this.http.get(this.url + '/api/UserBoards/By/' + this.currentUser + '/' + data.boardId).subscribe(result => {
             this.newuserboardresult = result.json();
 
-            this.http.post(this.url + '/api/Content', this.contenttopost).subscribe(res => {
-                this.newcontentresult = res.json()
+            this.http.post(this.url + '/api/Content', this.contentToPost).subscribe(res => {
+                this.newContentResult = res.json()
 
 
-                this.usercontenttopost.userId = 7;
-                this.usercontenttopost.contentId = this.newcontentresult.id;
-                this.usercontenttopost.userBoardId = data.boardId;
-                this.usercontenttopost.userDescription = data.userDescription;
+                this.userContentToPost.userId = 7;
+                this.userContentToPost.contentId = this.newContentResult.id;
+                this.userContentToPost.userBoardId = data.boardId;
+                this.userContentToPost.userDescription = data.userDescription;
 
-                this.http.post(this.url + '/api/UserContent', this.usercontenttopost).subscribe(res => { });
+                this.http.post(this.url + '/api/UserContent', this.userContentToPost).subscribe(res => { });
 
         }, error => console.error(error));
 
@@ -72,7 +72,7 @@ export class NewContentComponent {
     }
 }
 
-interface boards {
+interface Boards {
     id: number,
     boardId: number,
     title: string,
@@ -88,18 +88,18 @@ interface userBoardDto {
     isPublic: boolean,
 }
 
-interface contenttopost {
+interface ContentToPost {
     title: string,
     url: string,
 }
 
-interface contentDto {
+interface ContentDto {
     id: number,
     title: string,
     url: string,
 }
 
-interface usercontent {
+interface UserContent {
     userId: number,
     contentId: number,
     userBoardId: number,

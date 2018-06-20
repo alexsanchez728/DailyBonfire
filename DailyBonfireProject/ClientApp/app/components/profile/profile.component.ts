@@ -6,21 +6,21 @@ import { Http } from '@angular/http';
     templateUrl: './profile.component.html'
 })
 export class ProfileComponent {
-    public user: user;
+    public user: User;
 
     constructor(http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.user = {} as user;
+        this.user = {} as User;
 
         http.get(apiUrl + '/api/User/7').subscribe(result => {
-            this.user = result.json() as user;
+            this.user = result.json() as User;
         }, error => console.error(error));
     }
 
 }
 
-interface user {
-    Name: string;
-    Bio: string;
-    JoinDate: Date;
+interface User {
+    name: string;
+    bio: string;
+    joinDate: Date;
 }

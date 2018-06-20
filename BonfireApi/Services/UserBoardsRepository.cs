@@ -104,13 +104,12 @@ namespace DailyBonfireProject.Services
 	                                                            when ub.UserId = @userId AND @userId = @currentUserId then 1
 	                                                            when ub.IsPublic = 1 AND ub.UserId = @userId then 1 
 	                                                            else 0
-                                                            end) = 1"
-                                                                , new { currentUserId, userId });
+                                                            end) = 1", new { currentUserId, userId });
                 return results.ToList();
             }
         }
 
-        public bool Post(UserBoardsDto input)
+        public bool AddNewUserBoard(UserBoardsDto input)
         {
             using (var db = GetConnection())
             {
@@ -127,7 +126,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Put(UserBoardsDto userBoard)
+        public bool UpdateUserBoard(UserBoardsDto userBoard)
         {
             using (var db = GetConnection())
             {
@@ -141,7 +140,7 @@ namespace DailyBonfireProject.Services
             }
         }
 
-        public bool Delete(int boardId)
+        public bool DeleteUserBoard(int boardId)
         {
             using (var db = GetConnection())
             {

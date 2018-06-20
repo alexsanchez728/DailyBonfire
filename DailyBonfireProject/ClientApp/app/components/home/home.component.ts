@@ -8,7 +8,7 @@ import { forEach } from '@angular/router/src/utils/collection';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-    public content: contentDisplayable[];
+    public content: ContentDisplayable[];
     public http: Http;
     public url: string;
     public userResult: any;
@@ -22,7 +22,7 @@ export class HomeComponent {
         this.userResult = {} as any;
 
         http.get(apiUrl + '/api/UserContent/' + this.currentUser).subscribe(result => {
-            this.content = result.json() as contentDisplayable[];
+            this.content = result.json() as ContentDisplayable[];
 
             for (let item of this.content) {
                 this.http.get(this.url + '/api/User/' + item.userId).subscribe(result => {
@@ -51,7 +51,7 @@ export class HomeComponent {
     }
 }
 
-interface contentDisplayable {
+interface ContentDisplayable {
     userId: number,
     contentId: number,
     userBoardId: number,

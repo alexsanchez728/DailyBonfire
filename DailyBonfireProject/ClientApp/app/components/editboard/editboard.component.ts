@@ -8,13 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditBoardComponent {
 
-    public userBoardSelected: boarddisplayable;
-    private userBoardToUpdate: userboard;
+    public userBoardSelected: BoardDisplayable;
+    private userBoardToUpdate: UserBoard;
     private boardToUpdate: BoardsDto;
 
     private selection: number | null;
     private currentUser: number;
-    private contentWithMatchingBoardId: userContentDto[];
+    private contentWithMatchingBoardId: UserContentDto[];
 
     private http: Http;
     private router: Router;
@@ -29,12 +29,12 @@ export class EditBoardComponent {
         this.currentUser = 7;
 
         this.boardToUpdate = {} as BoardsDto;
-        this.userBoardToUpdate = {} as userboard;
-        this.userBoardSelected = {} as boarddisplayable;
+        this.userBoardToUpdate = {} as UserBoard;
+        this.userBoardSelected = {} as BoardDisplayable;
 
         this.selection = Number(route.snapshot.paramMap.get('id'));
         http.get(apiUrl + '/api/UserBoards/' + this.selection).subscribe(result => {
-            this.userBoardSelected = result.json() as boarddisplayable;
+            this.userBoardSelected = result.json() as BoardDisplayable;
 
             this.userBoardToUpdate.userId = this.currentUser;
             this.userBoardToUpdate.boardId = this.userBoardSelected.boardId;
@@ -76,7 +76,7 @@ export class EditBoardComponent {
         if (this.userBoardSelected.userId === this.currentUser) {
 
             this.http.get(this.url + '/api/UserContent/board/' + this.userBoardToUpdate.boardId + '/' + this.currentUser).subscribe(result => {
-                this.contentWithMatchingBoardId = result.json() as userContentDto[];
+                this.contentWithMatchingBoardId = result.json() as UserContentDto[];
 
                 if (this.contentWithMatchingBoardId.length >= 1) {
 
@@ -108,14 +108,14 @@ export class EditBoardComponent {
     }
 
 }
-interface userboard {
+interface UserBoard {
     id: number,
     userId: number,
     boardId: number,
     isPublic: boolean,
 }
 
-interface boarddisplayable {
+interface BoardDisplayable {
     id: number,
     boardId: number,
     userName: string,
@@ -131,7 +131,7 @@ interface BoardsDto {
     descriptionFromUser: string,
 }
 
-interface userContentDto {
+interface UserContentDto {
     id: number,
     userId: number,
     contentId: number,

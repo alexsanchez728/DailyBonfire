@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-xs-offset-1 col-xs-10">
     <h3>Latest</h3>
     <div *ngFor="let item of content; let i = index" class="list-group">
         <button type="button" class="list-group-item" data-toggle="modal" [attr.data-target]="'#content_' + i ">
@@ -45,11 +45,3 @@
 
     </div>
 </div>
-<!--<div class="col-md-6">
-    <h3>Popular Tags</h3>
-    <button class="btn btn-default">one <span class="badge">400</span></button>
-    <button class="btn btn-default">two <span class="badge">399</span></button>
-    <button class="btn btn-default">threethree <span class="badge">120</span></button>
-    <button class="btn btn-default">four <span class="badge">10</span></button>
-    <button class="btn btn-default">five <span class="badge">1</span></button>
-</div>-->

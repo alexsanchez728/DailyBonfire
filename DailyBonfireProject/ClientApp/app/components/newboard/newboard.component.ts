@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
     templateUrl: './newboard.component.html'
 })
 export class NewBoardComponent {
-    public boardtopost: BoardsDto;
-    public newuserboard: UserBoardsDto;
-    public user: user;
+    public boardToPost: BoardsDto;
+    public newUserBoard: UserBoardsDto;
+    public user: User;
     private router: Router;
     private currentuser = 7;
 
@@ -21,16 +21,16 @@ export class NewBoardComponent {
 
     constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string) {
 
-        this.boardtopost = {} as BoardsDto;
-        this.newuserboard = {} as UserBoardsDto;
+        this.boardToPost = {} as BoardsDto;
+        this.newUserBoard = {} as UserBoardsDto;
 
         this.router = router;
-        this.user = {} as user;
+        this.user = {} as User;
         this.http = http;
         this.url = apiUrl;
 
         http.get(apiUrl + '/api/User/' + this.currentuser).subscribe(result => {
-            this.user = result.json() as user;
+            this.user = result.json() as User;
         }, error => console.error(error));
     }
 
@@ -40,15 +40,15 @@ export class NewBoardComponent {
 
     onClickSubmit(data: any) {
 
-        this.boardtopost.Title = data.title;
-        this.boardtopost.DescriptionFromUser = data.descriptionFromUser;
-        this.http.post(this.url + '/api/Boards', this.boardtopost ).subscribe(res => {
+        this.boardToPost.Title = data.title;
+        this.boardToPost.DescriptionFromUser = data.descriptionFromUser;
+        this.http.post(this.url + '/api/Boards', this.boardToPost ).subscribe(res => {
             this.newboardresult = res.json()
 
-            this.newuserboard.userId = this.user.id;
-            this.newuserboard.boardId = this.newboardresult.id;
+            this.newUserBoard.userId = this.user.id;
+            this.newUserBoard.boardId = this.newboardresult.id;
 
-            this.http.post(this.url + '/api/UserBoards', this.newuserboard).subscribe(res => {
+            this.http.post(this.url + '/api/UserBoards', this.newUserBoard).subscribe(res => {
                 this.back();
             });
         });
@@ -56,7 +56,7 @@ export class NewBoardComponent {
     }
 
     change(event: any) {
-        this.newuserboard.isPublic = event;
+        this.newUserBoard.isPublic = event;
     }
 
 
@@ -74,7 +74,7 @@ interface BoardsDto {
     DescriptionFromUser: string,
 }
 
-interface user {
+interface User {
     id: number,
     name: string,
     bio: string,
