@@ -24,7 +24,7 @@ namespace BonfireApi.Controllers
 
         // PUT api/content/5
         [HttpPut("{id}")]
-        public bool Put(ContentDto content)
+        public bool Put([FromBody]ContentDto content)
         {
             return _repo.UpdateContent(content);
         }

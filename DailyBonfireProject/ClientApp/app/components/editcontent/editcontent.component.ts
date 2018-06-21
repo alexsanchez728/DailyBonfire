@@ -72,7 +72,6 @@ export class EditContentComponent {
         this.contentToUpdate.id = this.userContentToUpdate.userBoardId;
         this.contentToUpdate.title = data.contentTitle;
         this.contentToUpdate.url = data.url;
-
         console.log(this.contentToUpdate);
         return this.Update();
     }
