@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'home',
@@ -16,14 +15,17 @@ export class HomeComponent {
     public currentUser: number;
 
     constructor(http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
-
+        this.content = [] as ContentDisplayable[];
         this.http = http;
         this.url = apiUrl;
+
         this.currentUser = currentUser;
         this.userResult = {} as any;
 
-        http.get(apiUrl + '/api/UserContent/' + this.currentUser).subscribe(result => {
-            this.content = result.json() as ContentDisplayable[];
+            console.log(currentUser);
+        http.get(apiUrl + '/api/UserContent/' + currentUser).subscribe(res => {
+
+            this.content = res.json() as ContentDisplayable[];
 
             for (let item of this.content) {
                 this.http.get(this.url + '/api/User/' + item.userId).subscribe(result => {

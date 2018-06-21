@@ -57,8 +57,12 @@ export class EditContentComponent {
         this.userContentToUpdate.userBoardId = event.id;
     }
 
-    onClickSubmit(data: ContentDisplayable) {
+    onClickSubmit(data: any) {
+        this.FillInContentToUpdate(data);
+    }
 
+    FillInContentToUpdate(data: any) {
+        console.log(data.url);
         this.userContentToUpdate.id = this.content.id;
         this.userContentToUpdate.userId = this.currentUser;
         this.userContentToUpdate.contentId = this.content.contentId;
@@ -69,13 +73,16 @@ export class EditContentComponent {
         this.contentToUpdate.title = data.contentTitle;
         this.contentToUpdate.url = data.url;
 
-        this.http.put(this.url + '/api/UserContent/' + this.userContentToUpdate.id, this.userContentToUpdate).subscribe(result => {
+        console.log(this.contentToUpdate);
+        return this.Update();
+    }
 
-            this.http.put(this.url + '/api/Content/' + this.contentToUpdate.id, this.contentToUpdate).subscribe(result => {
+    Update() {
+        this.http.put(this.url + '/api/UserContent/' + this.userContentToUpdate.id, this.userContentToUpdate).subscribe(result => { }, error => console.error(error));
 
-                this.back();
+        this.http.put(this.url + '/api/Content/' + this.contentToUpdate.id, this.contentToUpdate).subscribe(result => {
 
-            }, error => console.error(error));
+            this.back();
 
         }, error => console.error(error));
 
@@ -110,6 +117,7 @@ interface ContentDto {
     id: number,
     title: string,
     url: string,
+    websiteDescription: string,
 }
 
 interface UserContentDto {

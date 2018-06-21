@@ -52,7 +52,7 @@
             <label class="col-md-4 control-label" for="boardOptions">Save To Board</label>
             <div class="col-md-4 input-group">
                 <select [(ngModel)]="newcontent.boardId" name="boardId" id="boardOptions" class="form-control">
-                    <option [ngValue]="board.id"  *ngFor="let board of userboardoptions">{{ board.title }}</option>
+                    <option [ngValue]="board.id"  *ngFor="let board of userBoardOptions">{{ board.title }}</option>
                 </select>
             </div>
         </div>

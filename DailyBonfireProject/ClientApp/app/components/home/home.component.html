@@ -14,7 +14,7 @@
     <h3>Latest</h3>
     <div *ngFor="let item of content; let i = index" class="list-group">
         <button type="button" class="list-group-item" data-toggle="modal" [attr.data-target]="'#content_' + i ">
-            <span *ngIf="!item.isPublic && item.editable" class="glyphicon glyphicon-eye-close"></span>
+            <span *ngIf="!item.isPublic" class="glyphicon glyphicon-eye-close"></span>
             {{item.contentTitle}}
         </button>
         <!-- Modal -->

@@ -12,7 +12,7 @@ export class NewContentComponent {
     public contentToPost: ContentToPost;
     public userContentToPost: UserContent;
     public newContentResult: ContentDto;
-    public currentUser = 7;
+    public currentUser: number;
     private router: any;
 
     public http: Http;
@@ -20,14 +20,15 @@ export class NewContentComponent {
 
     private newuserboardresult: userBoardDto;
 
-    constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.contentToPost = {} as ContentToPost;
         this.userContentToPost = {} as UserContent;
         this.userBoardOptions = [] as Boards[];
         this.newuserboardresult = {} as userBoardDto;
-        this.router = router;
 
+        this.currentUser = currentUser;
+        this.router = router;
         this.http = http;
         this.url = apiUrl;
 
@@ -57,16 +58,18 @@ export class NewContentComponent {
                 this.newContentResult = res.json()
 
 
-                this.userContentToPost.userId = 7;
+                this.userContentToPost.userId = this.currentUser;
                 this.userContentToPost.contentId = this.newContentResult.id;
                 this.userContentToPost.userBoardId = data.boardId;
                 this.userContentToPost.userDescription = data.userDescription;
 
-                this.http.post(this.url + '/api/UserContent', this.userContentToPost).subscribe(res => { });
+                this.http.post(this.url + '/api/UserContent', this.userContentToPost).subscribe(res => {
+
+                    this.back();
+                });
 
         }, error => console.error(error));
 
-            this.back();
         }, error => console.error(error));
 
     }

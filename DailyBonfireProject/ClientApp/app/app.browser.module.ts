@@ -12,7 +12,7 @@ import { AppComponent } from './components/app/app.component';
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl },
         { provide: 'API_URL', useValue: 'http://localhost:54536' },
-        { provide: 'currentUser', useValue: 5 }
+        { provide: 'currentUser', useValue: 7 }
     ]
 })
 export class AppModule {
