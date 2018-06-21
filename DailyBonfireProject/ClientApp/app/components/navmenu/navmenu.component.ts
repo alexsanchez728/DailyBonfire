@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 @Component({
     selector: 'nav-menu',
@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./navmenu.component.css']
 })
 export class NavMenuComponent {
+    public currentUser: number;
+
+    constructor( @Inject('currentUser') currentUser: number) {
+        this.currentUser = currentUser;
+    }
 }

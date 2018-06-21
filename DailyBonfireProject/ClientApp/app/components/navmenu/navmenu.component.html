@@ -7,7 +7,7 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]="['/home']">DailyBonfireProject</a>
+            <a class='navbar-brand' [routerLink]="['/home']">The Daily Bonfire</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
@@ -23,12 +23,12 @@
                     </h4>
                 </li>
                  <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/userhomeboards/7']">
+                    <a [routerLink]="['/userhomeboards/', currentUser]">
                         <span class='glyphicon glyphicon-chevron-right'></span> Boards
                     </a>
                 </li>
                  <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/userhome/7']">
+                    <a [routerLink]="['/userhome/', currentUser]">
                         <span class='glyphicon glyphicon-chevron-right'></span> Saved
                     </a>
                 </li>

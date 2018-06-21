@@ -31,7 +31,7 @@ namespace DailyBonfireProject.Services
                                                                 c.UserId AS userId,
                                                                 ContentId,
                                                                 UserDescription,
-                                                                ub.IsPublic,
+                                                                c.IsPublic,
                                                                 [Name] AS UserName,
                                                                 UserBoardId,
                                                                 b.Title AS BoardTitle,

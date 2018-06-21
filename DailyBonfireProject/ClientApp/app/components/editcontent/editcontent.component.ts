@@ -13,20 +13,21 @@ export class EditContentComponent {
     public content: ContentDisplayable;
     public userContentToUpdate: UserContentDto;
     public contentToUpdate: ContentDto;
-    private currentUser = 7;
+    private currentUser: number;
     private router: any
 
     private http: Http;
     private url: string;
 
-    constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.userBoardOptions = [] as UserBoard[];
         this.userContentToUpdate = {} as UserContentDto;
         this.contentToUpdate = {} as ContentDto;
         this.content = {} as ContentDisplayable;
-        this.router = router;
 
+        this.router = router;
+        this.currentUser = currentUser;
         this.http = http;
         this.url = apiUrl;
 
@@ -56,8 +57,12 @@ export class EditContentComponent {
         this.userContentToUpdate.userBoardId = event.id;
     }
 
-    onClickSubmit(data: ContentDisplayable) {
+    onClickSubmit(data: any) {
+        this.FillInContentToUpdate(data);
+    }
 
+    FillInContentToUpdate(data: any) {
+        console.log(data.url);
         this.userContentToUpdate.id = this.content.id;
         this.userContentToUpdate.userId = this.currentUser;
         this.userContentToUpdate.contentId = this.content.contentId;
@@ -67,14 +72,16 @@ export class EditContentComponent {
         this.contentToUpdate.id = this.userContentToUpdate.userBoardId;
         this.contentToUpdate.title = data.contentTitle;
         this.contentToUpdate.url = data.url;
+        console.log(this.contentToUpdate);
+        return this.Update();
+    }
 
-        this.http.put(this.url + '/api/UserContent/' + this.userContentToUpdate.id, this.userContentToUpdate).subscribe(result => {
+    Update() {
+        this.http.put(this.url + '/api/UserContent/' + this.userContentToUpdate.id, this.userContentToUpdate).subscribe(result => { }, error => console.error(error));
 
-            this.http.put(this.url + '/api/Content/' + this.contentToUpdate.id, this.contentToUpdate).subscribe(result => {
+        this.http.put(this.url + '/api/Content/' + this.contentToUpdate.id, this.contentToUpdate).subscribe(result => {
 
-                this.back();
-
-            }, error => console.error(error));
+            this.back();
 
         }, error => console.error(error));
 
@@ -109,6 +116,7 @@ interface ContentDto {
     id: number,
     title: string,
     url: string,
+    websiteDescription: string,
 }
 
 interface UserContentDto {

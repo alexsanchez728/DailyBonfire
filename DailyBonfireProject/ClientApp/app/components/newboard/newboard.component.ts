@@ -12,30 +12,31 @@ export class NewBoardComponent {
     public newUserBoard: UserBoardsDto;
     public user: User;
     private router: Router;
-    private currentuser = 7;
+    private currentUser: number;
 
     private http: Http;
     private url: string;
 
     private newboardresult: any;
 
-    constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(router: Router, http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.boardToPost = {} as BoardsDto;
         this.newUserBoard = {} as UserBoardsDto;
-
-        this.router = router;
         this.user = {} as User;
+
+        this.currentUser = currentUser;
+        this.router = router;
         this.http = http;
         this.url = apiUrl;
 
-        http.get(apiUrl + '/api/User/' + this.currentuser).subscribe(result => {
+        http.get(apiUrl + '/api/User/' + this.currentUser).subscribe(result => {
             this.user = result.json() as User;
         }, error => console.error(error));
     }
 
     back() {
-        this.router.navigateByUrl('userhomeboards/' + this.currentuser);
+        this.router.navigateByUrl('userhomeboards/' + this.currentUser);
     }
 
     onClickSubmit(data: any) {
