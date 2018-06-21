@@ -20,13 +20,13 @@ export class EditBoardComponent {
     private router: Router;
     private url: string;
 
-    constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.http = http;
         this.url = apiUrl;
         this.router = router;
 
-        this.currentUser = 7;
+        this.currentUser = currentUser;
 
         this.boardToUpdate = {} as BoardsDto;
         this.userBoardToUpdate = {} as UserBoard;

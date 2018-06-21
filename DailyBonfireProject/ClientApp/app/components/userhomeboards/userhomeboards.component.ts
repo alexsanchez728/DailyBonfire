@@ -11,11 +11,13 @@ export class UserHomeBoardsComponent {
     public userName: string;
     public selection: number;
 
-    public currentUser = 7;
+    public currentUser: number;
 
-    constructor(http: Http, route: ActivatedRoute, @Inject('API_URL') apiUrl: string) {
+    constructor(http: Http, route: ActivatedRoute, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.selection = Number(route.snapshot.paramMap.get('id'));
+        this.currentUser = currentUser;
+
         http.get(apiUrl + '/api/user/' + this.selection).subscribe(res => {
             this.userName = res.json().name;
         });

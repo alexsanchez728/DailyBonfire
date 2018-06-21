@@ -14,11 +14,11 @@ export class BoardComponent {
     private selection: number;
     public editable: boolean;
 
-    constructor(route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.userBoard = {} as Board;
         this.selection = Number(route.snapshot.paramMap.get('id'));
-        this.currentUser = 7;
+        this.currentUser = currentUser;
 
         http.get(apiUrl + '/api/UserBoards/' + this.selection).subscribe(result => {
             this.userBoard = result.json() as Board;

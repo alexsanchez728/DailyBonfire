@@ -12,10 +12,12 @@ export class UserHomeComponent {
     public selection: number;
     public editable: boolean;
 
-    public currentUser = 7
+    public currentUser: number;
 
-    constructor(http: Http, route: ActivatedRoute, @Inject('API_URL') apiUrl: string) {
+    constructor(http: Http, route: ActivatedRoute, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
         this.content = [] as Content[];
+
+        this.currentUser = currentUser;
         this.selection = Number(route.snapshot.paramMap.get('id'));
 
         http.get(apiUrl + '/api/user/' + this.selection).subscribe(res => {

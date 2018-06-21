@@ -13,12 +13,13 @@ export class HomeComponent {
     public url: string;
     public userResult: any;
 
-    public currentUser = 7;
+    public currentUser: number;
 
-    constructor(http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.http = http;
         this.url = apiUrl;
+        this.currentUser = currentUser;
         this.userResult = {} as any;
 
         http.get(apiUrl + '/api/UserContent/' + this.currentUser).subscribe(result => {

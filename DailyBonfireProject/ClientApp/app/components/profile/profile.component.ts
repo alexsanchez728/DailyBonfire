@@ -7,12 +7,14 @@ import { Http } from '@angular/http';
 })
 export class ProfileComponent {
     public user: User;
+    public currentUser: number;
 
-    constructor(http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.user = {} as User;
+        this.currentUser = currentUser;
 
-        http.get(apiUrl + '/api/User/7').subscribe(result => {
+        http.get(apiUrl + '/api/User/' + this.currentUser).subscribe(result => {
             this.user = result.json() as User;
         }, error => console.error(error));
     }

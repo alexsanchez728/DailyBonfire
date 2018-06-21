@@ -13,20 +13,21 @@ export class EditContentComponent {
     public content: ContentDisplayable;
     public userContentToUpdate: UserContentDto;
     public contentToUpdate: ContentDto;
-    private currentUser = 7;
+    private currentUser: number;
     private router: any
 
     private http: Http;
     private url: string;
 
-    constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string) {
+    constructor(router: Router, route: ActivatedRoute, http: Http, @Inject('API_URL') apiUrl: string, @Inject('currentUser') currentUser: number) {
 
         this.userBoardOptions = [] as UserBoard[];
         this.userContentToUpdate = {} as UserContentDto;
         this.contentToUpdate = {} as ContentDto;
         this.content = {} as ContentDisplayable;
-        this.router = router;
 
+        this.router = router;
+        this.currentUser = currentUser;
         this.http = http;
         this.url = apiUrl;
 
