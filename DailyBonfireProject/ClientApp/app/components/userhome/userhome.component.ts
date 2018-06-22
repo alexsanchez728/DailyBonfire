@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserHomeComponent {
     public content: Content[];
     public userName: string;
+    public userId: number;
     public selection: number;
     public editable: boolean;
 
@@ -22,6 +23,7 @@ export class UserHomeComponent {
 
         http.get(apiUrl + '/api/user/' + this.selection).subscribe(res => {
             this.userName = res.json().name;
+            this.userId = res.json().id;
         });
 
         http.get(apiUrl + '/api/UserContent/see/' + this.currentUser + '/' + this.selection).subscribe(result => {

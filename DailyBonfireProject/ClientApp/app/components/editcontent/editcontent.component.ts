@@ -62,17 +62,16 @@ export class EditContentComponent {
     }
 
     FillInContentToUpdate(data: any) {
-        console.log(data.url);
+
         this.userContentToUpdate.id = this.content.id;
         this.userContentToUpdate.userId = this.currentUser;
         this.userContentToUpdate.contentId = this.content.contentId;
         this.userContentToUpdate.userBoardId = data.userBoardId;
         this.userContentToUpdate.userDescription = data.userDescription;
 
-        this.contentToUpdate.id = this.userContentToUpdate.userBoardId;
+        this.contentToUpdate.id = this.chosenUserContentId;
         this.contentToUpdate.title = data.contentTitle;
         this.contentToUpdate.url = data.url;
-        console.log(this.contentToUpdate);
         return this.Update();
     }
 

@@ -26,7 +26,7 @@ export class BoardComponent {
             http.get(apiUrl + '/api/UserContent/board/' + this.userBoard.boardId + '/' + this.currentUser).subscribe(result => {
                 this.content = result.json() as ContentDisplayDto[];
 
-                return this.currentUser == this.selection ? this.editable = true : this.editable = false;
+                return this.currentUser == this.userBoard.userId ? this.editable = true : this.editable = false;
 
             }, error => console.error(error));
         }, error => console.error(error));
