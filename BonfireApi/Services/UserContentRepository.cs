@@ -83,13 +83,12 @@ namespace DailyBonfireProject.Services
             using (var db = GetConnection())
             {
                 db.Open();
-                // This isn't going to go thru since Id exists twice in this object, i need it to map to UC's id
                 var results = db.Query<ContentDisplayDto>(@"select 
                                                                 c.UserId AS userId,
                                                                 c.id AS Id,
                                                                 ContentId,
                                                                 UserDescription,
-                                                                ub.IsPublic,
+                                                                c.IsPublic,
                                                                 [Name] AS UserName,
                                                                 UserBoardId,
                                                                 b.id AS BoardId,
@@ -104,8 +103,12 @@ namespace DailyBonfireProject.Services
 		                                                            On ub.Id = c.UserBoardId
 	                                                            Join [User] on c.UserId = [User].Id
                                                                 Join Content on c.ContentId = Content.Id
-	                                                            Where b.id = @boardId
-	                                                            and c.UserId = @userId", new { boardId, userId });
+	                                                            Where 
+																(case
+																	when b.id = @boardId AND c.userId = @userId then 1
+																	when b.id = @boardId and c.IsPublic = 1 then 1
+																	else 0
+																	end) = 1", new { boardId, userId });
 
                 return results.ToList();
             }
