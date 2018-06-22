@@ -1,4 +1,8 @@
-﻿<h1>{{ userName }}'s contributions & Saves</h1>
+﻿<div>
+    <div class="col-md-offset-2 col-md-10">
+        <h1>{{ userName }}'s contributions & Saves</h1>
+    </div>
+</div>
 
 <p *ngIf="!content"><em>Loading...</em></p>
 
@@ -35,3 +39,8 @@
     </div>
 </div>
 <div *ngIf="!content">Nothing to see here folks ...</div>
+<div class="col-xs-12">
+    <div>
+        <button class="btn btn-default" [routerLink]="['/userhomeboards', userId]">See {{ userName }}'s Posts</button>
+    </div>
+</div>

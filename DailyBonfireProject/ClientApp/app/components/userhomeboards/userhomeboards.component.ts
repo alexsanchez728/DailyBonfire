@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserHomeBoardsComponent {
     public boards: Boards[];
     public userName: string;
+    public userId: number;
     public selection: number;
 
     public currentUser: number;
@@ -20,6 +21,7 @@ export class UserHomeBoardsComponent {
 
         http.get(apiUrl + '/api/user/' + this.selection).subscribe(res => {
             this.userName = res.json().name;
+            this.userId = res.json().id;
         });
 
         http.get(apiUrl + '/api/UserBoards/' + this.currentUser + '/' + this.selection).subscribe(result => {

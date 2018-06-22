@@ -22,7 +22,6 @@ export class HomeComponent {
         this.currentUser = currentUser;
         this.userResult = {} as any;
 
-            console.log(currentUser);
         http.get(apiUrl + '/api/UserContent/' + currentUser).subscribe(res => {
 
             this.content = res.json() as ContentDisplayable[];

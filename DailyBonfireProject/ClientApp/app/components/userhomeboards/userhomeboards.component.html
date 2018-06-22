@@ -20,9 +20,15 @@
         </div>
     </div>
 
-    <button *ngIf="canAdd()" [routerLink]="['/newboard']" type="button" class="btn btn-success btn-lg center-block">
-        <span class="glyphicon glyphicon-plus"></span>
-    </button>
+        <button *ngIf="canAdd()" [routerLink]="['/newboard']" type="button" class="btn btn-success btn-lg center-block">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+
+    <div class="col-xs-12">
+        <div class="center-block">
+            <button class="btn btn-default" [routerLink]="['/userhome', userId]">See {{ userName }}'s Boards</button>
+        </div>
+    </div>
 
 </div>
 <h3 *ngIf="boards == false">Doesn't look like anything to me...</h3>

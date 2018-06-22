@@ -1,6 +1,6 @@
 ﻿<h1>{{ userBoard.title }}</h1>
 <h4>{{ userBoard.descriptionFromUser }}</h4>
-<button class="btn btn-warning" [routerLink]="['/editboard', userBoard.boardId]">Edit</button>
+<button *ngIf="editable" class="btn btn-warning" [routerLink]="['/editboard', userBoard.boardId]">Edit</button>
 <h4>
     Posted By: <a [routerLink]="['/user', userBoard.userId]">{{ userBoard.userName }}</a>
 </h4>
