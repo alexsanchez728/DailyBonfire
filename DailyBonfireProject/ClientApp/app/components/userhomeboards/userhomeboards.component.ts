@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'userhomeboards',
     templateUrl: './userhomeboards.component.html',
+    styleUrls: ['./userhomeboards.component.css']
+
 })
 export class UserHomeBoardsComponent {
     public boards: Boards[];
